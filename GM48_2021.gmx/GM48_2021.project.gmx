@@ -31,16 +31,25 @@
       <sprite>sprites\spr_trees_4</sprite>
     </sprites>
     <sprite>sprites\spr_circle</sprite>
+    <sprite>sprites\spr_crab</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\alert.gml</script>
+    <script>scripts\draw_text_outline.gml</script>
+  </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_blur_water.shader</shader>
     <shader type="GLSLES">shaders\shader_blur_water_small.shader</shader>
-    <shader type="GLSLES">shaders\shader_blur2.shader</shader>
+    <shader type="GLSLES">shaders\shader_blur_sand.shader</shader>
+    <shader type="GLSLES">shaders\shader_blur_sand_small.shader</shader>
   </shaders>
+  <fonts name="fonts">
+    <font>fonts\font0</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_camera</object>
     <object>objects\obj_player</object>
@@ -61,6 +70,7 @@
     <object>objects\obj_wake</object>
     <object>objects\obj_tree_generator</object>
     <object>objects\obj_globals</object>
+    <object>objects\obj_alert_text</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

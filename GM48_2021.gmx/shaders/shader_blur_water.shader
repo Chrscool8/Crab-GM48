@@ -20,7 +20,7 @@ void main()
 
 //######################_==_YOYO_SHADER_MARKER_==_######################@~varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
-uniform vec3 size; //width,height,radius
+uniform vec3 size; //width, height, radius
 uniform float xoffset;
 const int Quality = 36;
 const int Directions = 32;
@@ -31,13 +31,13 @@ void main()
     vec2 radius = size.z/size.xy;
     vec2 coord = v_vTexcoord;
     
-    float band_xsize = .025/8.;
-//    float band_ysize = .025/8.;
+    //float band_xsize = .025/8.;
+    //float band_ysize = .025/8.;
     //coord.x = ceil(coord.x/band_xsize)*(band_xsize);
     //coord.y = ceil(coord.y/band_xsize)*(band_xsize);
     
     vec4 Color = texture2D(gm_BaseTexture, coord);
-    float alpha = Color.a;
+    //float alpha = Color.a;
     
     for(float d = 0.0; d < Pi; d += Pi/float(Directions))
     {
