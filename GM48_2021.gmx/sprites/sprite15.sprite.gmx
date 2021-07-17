@@ -7,19 +7,20 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>36</bbox_left>
-  <bbox_right>995</bbox_right>
-  <bbox_top>24</bbox_top>
-  <bbox_bottom>1004</bbox_bottom>
+  <bbox_left>711</bbox_left>
+  <bbox_right>1097</bbox_right>
+  <bbox_top>454</bbox_top>
+  <bbox_bottom>741</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
-  <For3D>-1</For3D>
-  <width>1024</width>
-  <height>1024</height>
+  <For3D>0</For3D>
+  <width>1600</width>
+  <height>900</height>
   <frames>
-    <frame index="0">images\spr_ripples_0.png</frame>
+    <frame index="0">images\sprite15_0.png</frame>
+    <frame index="1">images\sprite15_1.png</frame>
   </frames>
 </sprite>
