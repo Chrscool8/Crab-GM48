@@ -23,8 +23,14 @@
     <sprite>sprites\spr_rocks</sprite>
     <sprite>sprites\sprite13</sprite>
     <sprite>sprites\spr_boat</sprite>
-    <sprite>sprites\sprite15</sprite>
-    <sprite>sprites\sprite17</sprite>
+    <sprites name="trees">
+      <sprite>sprites\spr_trees_0</sprite>
+      <sprite>sprites\spr_trees_1</sprite>
+      <sprite>sprites\spr_trees_2</sprite>
+      <sprite>sprites\spr_trees_3</sprite>
+      <sprite>sprites\spr_trees_4</sprite>
+    </sprites>
+    <sprite>sprites\spr_circle</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -50,7 +56,9 @@
     <object>objects\obj_decoration</object>
     <object>objects\obj_boat</object>
     <object>objects\obj_tree_test</object>
+    <object>objects\object15</object>
     <object>objects\object13</object>
+    <object>objects\obj_tree_generator</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
