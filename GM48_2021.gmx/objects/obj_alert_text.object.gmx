@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>yy = view_hport - 60;
+            <string>yy = view_hport - 40;
 spd = 0;
 str = "";
 persist = 0;
