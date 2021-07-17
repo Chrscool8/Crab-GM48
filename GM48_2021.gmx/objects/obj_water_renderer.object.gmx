@@ -53,6 +53,9 @@
     surf = surface_create(view_wport*1.5, view_hport*1.5);
 }
 
+var wid = view_wport/8;
+var hei = view_hport/8;
+
 var zoom = 1;
 if instance_exists(obj_camera)
     zoom = obj_camera.zoom/2;
@@ -62,8 +65,8 @@ surface_set_target(surf);
 draw_clear_alpha(c_white, 0);
 with(par_water)
 {
-    var xx1 = (x-view_xview)/zoom;
-    var yy1 = (y-view_yview)/zoom;
+    var xx1 = (x-view_xview+(wid))/zoom;
+    var yy1 = (y-view_yview+(hei))/zoom;
     
     draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom, image_yscale/zoom, 0, c_black, 1);
 }
@@ -82,7 +85,7 @@ shader_set_uniform_f(outlineColor, surface_get_width(surf), surface_get_height(s
 outlineColor = shader_get_uniform(shader_blur2, "xoffset");
 shader_set_uniform_f(outlineColor, sin(current_time/5000-pi/4)/3);
 
-draw_surface_ext(surf, view_xview, view_yview, view_wview/view_wport, view_hview/view_hport, 0, c_white, 1);
+draw_surface_ext(surf, view_xview-wid, view_yview-hei, view_wview/view_wport, view_hview/view_hport, 0, c_white, 1);
 shader_reset();
 
 </string>
@@ -110,6 +113,9 @@ shader_reset();
     surf = surface_create(view_wport*1.5, view_hport*1.5);
 }
 
+var wid = view_wport/8;
+var hei = view_hport/8;
+
 var zoom = 1;
 if instance_exists(obj_camera)
     zoom = obj_camera.zoom/2;
@@ -119,8 +125,8 @@ surface_set_target(surf);
 draw_clear_alpha(c_white, 0);
 with(par_water)
 {
-    var xx1 = (x-view_xview)/zoom;
-    var yy1 = (y-view_yview)/zoom;
+    var xx1 = (x-view_xview+(wid))/zoom;
+    var yy1 = (y-view_yview+(hei))/zoom;
     
     draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom, image_yscale/zoom, 0, c_white, 1);
 }
@@ -130,7 +136,7 @@ with(par_water)
 //draw_set_blend_mode(bm_normal);
 surface_reset_target();
 
-var blur_size = 24 * (sin(current_time/3000)+1) +8;
+var blur_size = 24 * (sin(current_time/3000)+1)+8;
 
 if (not keyboard_check(ord("1")))
 shader_set(shader_blur);
@@ -140,7 +146,7 @@ shader_set_uniform_f(outlineColor, surface_get_width(surf), surface_get_height(s
 outlineColor = shader_get_uniform(shader_blur, "xoffset");
 shader_set_uniform_f(outlineColor, sin(current_time/5000)/3);
 
-draw_surface_ext(surf, view_xview, view_yview, view_wview/view_wport, view_hview/view_hport, 0, c_white, 1);
+draw_surface_ext(surf, view_xview-wid, view_yview-hei, view_wview/view_wport, view_hview/view_hport, 0, c_white, 1);
 shader_reset();
 
 </string>
