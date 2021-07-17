@@ -29,6 +29,7 @@
 spd = 0;
 surf = -1;
 sep = 2;
+ticker = 0;
 </string>
           </argument>
         </arguments>
@@ -64,6 +65,9 @@ if (not instance_position(x, y, obj_water))
     
 if (keyboard_check(vk_enter))
     spd = 4;
+    
+ticker += 1;
+ticker = ticker mod 2;
 </string>
           </argument>
         </arguments>
@@ -115,21 +119,24 @@ surface_reset_target();
 
 draw_surface_ext(surf, x-size/2, y-size/2+(size*.1), 1, .8, 0, c_white, 1);
 
-var h = instance_create(x+lengthdir_x(16, dir), y+lengthdir_y(16, dir), object13);
-h.dir = dir;
+if (ticker == 0 and abs(spd)&gt;.1)
+{
+    var h = instance_create(x+lengthdir_x(16, dir), y+lengthdir_y(16, dir), obj_wake);
+    h.dir = dir;
+}
 //h = instance_create(x, y-24, object13);
 //h.dir = dir - 90;
 
 if (keyboard_check(vk_left) or not instance_position(x, y, obj_water))
 {
-    var h = instance_create(x+lengthdir_x(16, dir+90), y+lengthdir_y(16, dir+90), object13);
+    var h = instance_create(x+lengthdir_x(16, dir+90), y+lengthdir_y(16, dir+90), obj_wake);
     h.dir = dir + 90;
     h.size = .5;
 }
 
 if (keyboard_check(vk_right) or not instance_position(x, y, obj_water))
 {
-    var h = instance_create(x+lengthdir_x(16, dir-90), y+lengthdir_y(16, dir-90), object13);
+    var h = instance_create(x+lengthdir_x(16, dir-90), y+lengthdir_y(16, dir-90), obj_wake);
     h.dir = dir - 90;
     h.size = .5;
 }

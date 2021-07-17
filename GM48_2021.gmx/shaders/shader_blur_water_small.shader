@@ -31,7 +31,7 @@ void main()
     vec2 radius = size.z/size.xy;
     vec2 coord = v_vTexcoord;
     
-    float band_xsize = .025/8.;
+    //float band_xsize = .025/8.;
     //float band_ysize = .025/8.;
     //coord.x = ceil(coord.x/band_xsize)*(band_xsize);
     //coord.y = ceil(coord.y/band_xsize)*(band_xsize);
