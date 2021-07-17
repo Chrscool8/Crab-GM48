@@ -31,6 +31,34 @@ settings = ds_map_create();
 ds_map_add(settings, "water_shader", 2);
 ds_map_add(settings, "sand_shader", 2);
 ds_map_add(settings, "surface_size", 1);
+
+globalvar key_left, key_right, key_up, key_down;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>key_left  = keyboard_check(vk_left) or keyboard_check(ord("A"));
+key_right = keyboard_check(vk_right) or keyboard_check(ord("D"));
+key_up    = keyboard_check(vk_up)or keyboard_check(ord("W"));
+key_down  = keyboard_check(vk_down) or keyboard_check(ord("S"));
 </string>
           </argument>
         </arguments>
