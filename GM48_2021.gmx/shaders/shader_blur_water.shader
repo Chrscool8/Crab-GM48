@@ -22,7 +22,6 @@ void main()
 varying vec4 v_vColour;
 uniform vec3 size; //width,height,radius
 uniform float xoffset;
-
 const int Quality = 36;
 const int Directions = 32;
 const float Pi = 6.28318530718; //pi * 2
@@ -34,21 +33,21 @@ void main()
     
     float band_xsize = .025/8.;
 //    float band_ysize = .025/8.;
-    coord.x = ceil(coord.x/band_xsize)*(band_xsize);
-    coord.y = ceil(coord.y/band_xsize)*(band_xsize);
+    //coord.x = ceil(coord.x/band_xsize)*(band_xsize);
+    //coord.y = ceil(coord.y/band_xsize)*(band_xsize);
     
     vec4 Color = texture2D(gm_BaseTexture, coord);
     float alpha = Color.a;
     
-    for(float d=0.0; d<Pi; d+=Pi/float(Directions))
+    for(float d = 0.0; d < Pi; d += Pi/float(Directions))
     {
-        for(float i=1.0/float(Quality); i<=1.0; i+=1.0/float(Quality) )
+        for(float i = 1.0/float(Quality); i <= 1.0; i += 1.0/float(Quality) )
         {
             Color += texture2D(gm_BaseTexture, coord+vec2(cos(d) + xoffset, sin(d))*radius*i*2.);
         }
     }
     
-    Color /= float(Quality) * float(Directions)+1.0;
+    Color /= float(Quality) * float(Directions) + 1.0;
     vec4 Color_ = Color * v_vColour;
     float band_size = .125;
 
