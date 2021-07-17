@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar settings;
+            <string>randomize();
+
+globalvar settings;
 settings = ds_map_create();
 
 ds_map_add(settings, "water_shader", 2);
@@ -33,6 +35,59 @@ ds_map_add(settings, "sand_shader", 2);
 ds_map_add(settings, "surface_size", 1);
 
 globalvar key_left, key_right, key_up, key_down;
+
+var a = audio_play_sound(choose(snd_crab_chase, snd_trapped_at_ocean), 1, true);
+audio_sound_gain(a, .1, 1);
+
+alarm[0] = room_speed;
+performance = ds_list_create();
+
+warned_performance = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alarm[0] = room_speed;
+
+ds_list_add(performance, fps);
+
+if (not warned_performance and ds_list_size(performance)&gt;10)
+{
+    var avg = 0;
+    for(var i = 0; i &lt; ds_list_size(performance); i++)
+    {
+        avg += ds_list_find_value(performance, i);
+    }
+    avg /= ds_list_size(performance);
+    
+    if (avg &lt; 54)
+    {
+        show_message("Check bottom left");
+        alert("Bad performance? Change the graphics settings with the 1, 2, and 3 keys.", 120);
+        warned_performance = true;        
+    }
+    
+    show_debug_message(string(avg));
+    ds_list_delete(performance, 0);
+} 
 </string>
           </argument>
         </arguments>
@@ -112,6 +167,52 @@ if (keyboard_check_pressed(ord("3")))
     
     alert("Surface Size Mult: "+string(settings[? "surface_size"]));
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="82">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>game_restart();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="27">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>game_end();
 </string>
           </argument>
         </arguments>

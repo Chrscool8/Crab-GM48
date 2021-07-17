@@ -28,6 +28,7 @@
             <string>yy = view_hport - 60;
 spd = 0;
 str = "";
+persist = 0;
 </string>
           </argument>
         </arguments>
@@ -50,8 +51,15 @@ str = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>spd += .01;
-yy += spd;
+            <string>if (persist &gt; 0)
+{
+    persist -= 1;
+}
+else
+{
+    spd += .01;
+    yy += spd;
+}
 depth = yy;
 
 draw_set_font(font0);

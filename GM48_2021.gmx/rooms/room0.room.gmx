@@ -81,6 +81,7 @@
     <instance objName="obj_tree_test" x="352" y="64" name="inst_7E3127D3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_camera" x="-2912" y="2208" name="inst_A59AA6C9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_globals" x="0" y="-32" name="inst_EC10C790" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_3d" x="160" y="96" name="inst_EDE2DDF4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
