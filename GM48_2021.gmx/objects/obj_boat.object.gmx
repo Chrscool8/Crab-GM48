@@ -52,10 +52,10 @@ ticker = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>spd += (keyboard_check(vk_up)-keyboard_check(vk_down))/20;
+            <string>spd += (key_up-key_down)/20;
 spd = clamp(spd, -5, 5);
 
-dir -= (keyboard_check(vk_right)-keyboard_check(vk_left));
+dir -= (key_right-key_left);
 
 x += lengthdir_x(spd, dir);
 y += lengthdir_y(spd, dir);
@@ -127,14 +127,14 @@ if (ticker == 0 and abs(spd)&gt;.1)
 //h = instance_create(x, y-24, object13);
 //h.dir = dir - 90;
 
-if (keyboard_check(vk_left) or not instance_position(x, y, obj_water))
+if (key_left or not instance_position(x, y, obj_water))
 {
     var h = instance_create(x+lengthdir_x(16, dir+90), y+lengthdir_y(16, dir+90), obj_wake);
     h.dir = dir + 90;
     h.size = .5;
 }
 
-if (keyboard_check(vk_right) or not instance_position(x, y, obj_water))
+if (key_right or not instance_position(x, y, obj_water))
 {
     var h = instance_create(x+lengthdir_x(16, dir-90), y+lengthdir_y(16, dir-90), obj_wake);
     h.dir = dir - 90;
