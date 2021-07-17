@@ -4,7 +4,10 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_crab_chase</sound>
+    <sound>sound\snd_trapped_at_ocean</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
     <sprites name="player">
@@ -51,6 +54,7 @@
     <font>fonts\font0</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_globals</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_player</object>
     <object>objects\object1</object>
@@ -69,7 +73,6 @@
     <object>objects\object15</object>
     <object>objects\obj_wake</object>
     <object>objects\obj_tree_generator</object>
-    <object>objects\obj_globals</object>
     <object>objects\obj_alert_text</object>
   </objects>
   <rooms name="rooms">
