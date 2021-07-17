@@ -37,7 +37,8 @@
   </backgrounds>
   <paths name="paths"/>
   <shaders name="shaders">
-    <shader type="GLSLES">shaders\shader_blur.shader</shader>
+    <shader type="GLSLES">shaders\shader_blur_water.shader</shader>
+    <shader type="GLSLES">shaders\shader_blur_water_small.shader</shader>
     <shader type="GLSLES">shaders\shader_blur2.shader</shader>
   </shaders>
   <objects name="objects">
@@ -57,8 +58,9 @@
     <object>objects\obj_boat</object>
     <object>objects\obj_tree_test</object>
     <object>objects\object15</object>
-    <object>objects\object13</object>
+    <object>objects\obj_wake</object>
     <object>objects\obj_tree_generator</object>
+    <object>objects\obj_globals</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
