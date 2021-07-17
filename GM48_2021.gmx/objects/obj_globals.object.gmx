@@ -87,7 +87,7 @@ if (not warned_performance and ds_list_size(performance)&gt;5)
         warned_performance = true;        
     }
     
-    show_debug_message(string(avg));
+    //show_debug_message(string(avg));
     ds_list_delete(performance, 0);
 } 
 </string>
