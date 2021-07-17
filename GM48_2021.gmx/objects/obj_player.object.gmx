@@ -30,9 +30,6 @@ vsp = 0;
 dir = 0;
 player_speed = 3;
 
-x += 16;
-y += 16;
-
 sprite_index = spr_player_down;
 </string>
           </argument>
@@ -165,7 +162,7 @@ depth = -y;
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="32">
+    <event eventtype="10" enumb="32">
       <action>
         <libid>1</libid>
         <id>603</id>
