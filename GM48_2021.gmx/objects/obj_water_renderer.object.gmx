@@ -111,7 +111,7 @@ if (shaders_are_supported() and shader_is_compiled(shader_blur_sand) and shader_
 }
 else
 {
-    if (surface_exists(surf))
+    /*if (surface_exists(surf))
     {
         surface_free(surf);
     }
@@ -126,7 +126,7 @@ else
         draw_self();
     }
     
-    draw_sprite_tiled_ext(spr_ripples, 0, (current_time/100), (current_time/200), .5, .5, c_white, .7);
+    draw_sprite_tiled_ext(spr_ripples, 0, (current_time/100), (current_time/200), .5, .5, c_white, .7);*/
 }
 </string>
           </argument>
@@ -152,87 +152,72 @@ else
 
 var quality_scale = settings[? "surface_size"];
 
+if (surface_exists(surf) and (surface_get_width(surf)!=view_wport*1.5*quality_scale or surface_get_width(surf)!=view_hport*1.5*quality_scale))
+{
+    surface_free(surf);
+}
+
+if (not surface_exists(surf))
+{
+    surf = surface_create(view_wport*1.5*quality_scale, view_hport*1.5*quality_scale);
+}
+
+var wid = view_wport/8;
+var hei = view_hport/8;
+
+var zoom = 1;
+if instance_exists(obj_camera)
+    zoom = obj_camera.zoom/2;
+
+surface_set_target(surf);
+
+draw_clear_alpha(c_white, 0);
+with(par_water)
+{
+    var xx1 = (x-view_xview+(wid))/zoom*quality_scale;
+    var yy1 = (y-view_yview+(hei))/zoom*quality_scale;
+    
+    draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale, image_yscale/zoom*quality_scale, 0, c_white, 1);
+}
+
+draw_set_colour_write_enable(true, true, true, false);
+with(obj_wake)
+{
+    var xx1 = (x-view_xview+(wid))/zoom*quality_scale;
+    var yy1 = (y-view_yview+(hei))/zoom*quality_scale;
+    
+    draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale, image_yscale/zoom*quality_scale, 0, c_white, .7);
+}
+
+draw_sprite_tiled_ext(spr_ripples, 0, (current_time/100-view_xview)/zoom*quality_scale, (current_time/200-view_yview)/zoom*quality_scale, .5/zoom*quality_scale, .5/zoom*quality_scale, c_white, .7);
+draw_set_colour_write_enable(true, true, true, true);
+surface_reset_target();
+
+var shader = -1;
 if (shaders_are_supported() and shader_is_compiled(shader_blur_water) and shader_is_compiled(shader_blur_water_small) and settings[? "water_shader"] != 0)
 {
-    if (surface_exists(surf) and (surface_get_width(surf)!=view_wport*1.5*quality_scale or surface_get_width(surf)!=view_hport*1.5*quality_scale))
-    {
-        surface_free(surf);
-    }
-    
-    if (not surface_exists(surf))
-    {
-        surf = surface_create(view_wport*1.5*quality_scale, view_hport*1.5*quality_scale);
-    }
-    
-    var wid = view_wport/8;
-    var hei = view_hport/8;
-    
-    var zoom = 1;
-    if instance_exists(obj_camera)
-        zoom = obj_camera.zoom/2;
-    
-    surface_set_target(surf);
-    
-    draw_clear_alpha(c_white, 0);
-    with(par_water)
-    {
-        var xx1 = (x-view_xview+(wid))/zoom*quality_scale;
-        var yy1 = (y-view_yview+(hei))/zoom*quality_scale;
-        
-        draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale, image_yscale/zoom*quality_scale, 0, c_white, 1);
-    }
-    
-    draw_set_colour_write_enable(true, true, true, false);
-    with(obj_wake)
-    {
-        var xx1 = (x-view_xview+(wid))/zoom*quality_scale;
-        var yy1 = (y-view_yview+(hei))/zoom*quality_scale;
-        
-        draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale, image_yscale/zoom*quality_scale, 0, c_white, .7);
-    }
-    
-    draw_sprite_tiled_ext(spr_ripples, 0, (current_time/100-view_xview)/zoom*quality_scale, (current_time/200-view_yview)/zoom*quality_scale, .5/zoom*quality_scale, .5/zoom*quality_scale, c_white, .7);
-    draw_set_colour_write_enable(true, true, true, true);
-    surface_reset_target();
-    
     var blur_size = 24 * (sin(current_time/3000)+1)+8;
     
-    var shader = shader_blur_water;
+    shader = shader_blur_water;
     
     if (settings[? "water_shader"] == 1)
     {
         shader = shader_blur_water_small;
     }
     
+    if not keyboard_check(vk_backspace)
     shader_set(shader);    
     var shaderparam = shader_get_uniform(shader, "size");
     shader_set_uniform_f(shaderparam, surface_get_width(surf), surface_get_height(surf), blur_size/zoom*quality_scale);
     shaderparam = shader_get_uniform(shader, "xoffset");
     shader_set_uniform_f(shaderparam, sin(current_time/5000)/3);
-    
-    if(surface_exists(surf))
-        draw_surface_ext(surf, view_xview-wid, view_yview-hei, view_wview/view_wport/quality_scale, view_hview/view_hport/quality_scale, 0, c_white, 1);
+}
+
+if(surface_exists(surf))
+    draw_surface_ext(surf, view_xview-wid, view_yview-hei, view_wview/view_wport/quality_scale, view_hview/view_hport/quality_scale, 0, c_white, 1);
+
+if (shader != -1)
     shader_reset();
-}
-else
-{
-    if (surface_exists(surf))
-    {
-        surface_free(surf);
-    }
-    
-    with(par_water)
-    {
-        draw_self();
-    }
-    
-    with(obj_wake)
-    {
-        draw_self();
-    }
-    
-    draw_sprite_tiled_ext(spr_ripples, 0, (current_time/100), (current_time/200), .5, .5, c_white, .7);
-}
 </string>
           </argument>
         </arguments>

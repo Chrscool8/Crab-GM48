@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>99999</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -44,7 +44,7 @@ for(var i = 1; i &lt; creation_size; i+= 75)
     }
 }*/
 
-creation_size = random(750);
+creation_size = random_range(100, 350);
 
 for(var i = 0; i &lt; 1; i += .2)
 {
@@ -60,10 +60,41 @@ for(var i = 0; i &lt; 1; i += .2)
         var yy = y + lengthdir_y(dis, dir) + irandom_range(-50, 50);
         if (!collision_circle(xx, yy, 50, par_water, true, true))
         {
-            var h = instance_create(xx, yy, obj_tree_test);
-            h.darkness = (1-i)/2;
+            if (distance_to_object(instance_nearest(xx, yy, obj_tree_test)&gt;50))
+            {
+                var h = instance_create(xx, yy, obj_tree_test);
+                h.darkness = (1-i)/2;
+            }
         }
     }
+}
+
+my_sprite = -1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (sprite_exists(my_sprite))
+{
+    sprite_delete(my_sprite);
 }
 </string>
           </argument>
@@ -89,7 +120,73 @@ for(var i = 0; i &lt; 1; i += .2)
             <kind>1</kind>
             <string>/*draw_set_blend_mode(bm_subtract);
 draw_ellipse_colour(x-creation_size, y-creation_size, x+creation_size, y+creation_size, c_white, c_black, false);
-draw_set_blend_mode(bm_normal);
+draw_set_blend_mode(bm_normal);*/
+
+var surface_size = creation_size*3;
+if (my_sprite == -1)
+{
+    if (surface_size != 0)
+    {
+        var surf = surface_create(surface_size, surface_size);
+        
+        if (surface_exists(surf))
+        {
+            surface_set_target(surf);
+            draw_clear_alpha(c_black, 0);
+            
+            for(var i = 0; i &lt; 1; i += .05)
+            {
+                var num_trees = power(3, i*5);
+                //show_debug_message("NUM"+string(num_trees));
+                var off = random(360);
+                for(var j = 0; j &lt; 360; j += 360/num_trees)
+                {
+                    //show_debug_message("&gt;"+string(j));    
+                    var dir = j+off+irandom_range(-5, 5);
+                    var dis = sqr(i)*creation_size;
+                    var xx = x + lengthdir_x(dis, dir) + irandom_range(-50, 50);
+                    var yy = y + lengthdir_y(dis, dir) + irandom_range(-50, 50);
+                    if (!collision_circle(xx, yy, 20, par_water, true, true))
+                    {
+                        draw_sprite(spr_grass, random(sprite_get_number(spr_grass)), xx-x+surface_size/2, yy-y+surface_size/2)
+                        //effect_create_above(ef_ring, xx, yy, 1, c_white);
+                    }
+                }
+            }
+            surface_reset_target();
+            
+            my_sprite = sprite_create_from_surface(surf, 0, 0, surface_size, surface_size, false, false, 0, 0);
+            surface_free(surf);
+        }  
+    }  
+}
+else
+{
+    draw_sprite(my_sprite, 0, x-surface_size/2, y-surface_size/2);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_destroy();
 </string>
           </argument>
         </arguments>
