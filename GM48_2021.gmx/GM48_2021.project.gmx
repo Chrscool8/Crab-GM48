@@ -5,8 +5,9 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound">
-    <sound>sound\snd_crab_chase</sound>
-    <sound>sound\snd_trapped_at_ocean</sound>
+    <sound>sound\msc_crab_chase</sound>
+    <sound>sound\msc_trapped_at_ocean</sound>
+    <sound>sound\msc_ocean_adventure</sound>
     <sound>sound\snd_activate_stone</sound>
     <sound>sound\snd_womwomwom</sound>
     <sound>sound\snd_puff</sound>
@@ -69,6 +70,8 @@
   <scripts name="scripts">
     <script>scripts\alert.gml</script>
     <script>scripts\draw_text_outline.gml</script>
+    <script>scripts\music_player_play.gml</script>
+    <script>scripts\sfx_player_play.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_blur_water.shader</shader>

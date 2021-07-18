@@ -170,8 +170,8 @@ draw_sprite_ext(sprite_index, 0, x, y, image_xscale, image_yscale, image_angle, 
 if (!activated and instance_exists(obj_player) and distance_to_object(obj_player)&lt;50)
 {
     activated = true;
-    audio_play_sound(snd_activate_stone, 1, false);
-    audio_play_sound(snd_womwomwom, 1, false);
+    sfx_player_play(snd_activate_stone, 1, false);
+    sfx_player_play(snd_womwomwom, 1, false);
 }
 
 if(letter != -1)
@@ -208,8 +208,8 @@ if(letter != -1)
         was_letter = letter;
         letter = -1;
         alarm[0] = 45;
-        audio_play_sound(snd_puff2, 1, false);
-        audio_play_sound(snd_collect, 1, false);
+        sfx_player_play(snd_puff2, 1, false);
+        sfx_player_play(snd_collect, 1, false);
         effect_create_above(ef_firework, x, y-40, 0, c_yellow);
     }
 }
