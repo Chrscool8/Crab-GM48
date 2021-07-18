@@ -82,6 +82,27 @@ was_letter = -1;
           <argument>
             <kind>1</kind>
             <string>ds_list_add(global.collected_letters, was_letter);
+
+switch (was_letter)
+{
+    case spr_compass: 
+        alert("You found the compass! Your location is now on the map.", room_speed*3);
+    break;
+    case spr_letter_C: 
+        alert("You found the C!", room_speed*3);
+    break;
+    case spr_letter_A: 
+        alert("You found the A!", room_speed*3);
+    break;    
+    case spr_letter_R: 
+        alert("You found the R!", room_speed*3);
+    break;    
+    case spr_letter_B: 
+        alert("You found the B!", room_speed*3);
+    break;
+    default: ;
+}
+ 
 </string>
           </argument>
         </arguments>
