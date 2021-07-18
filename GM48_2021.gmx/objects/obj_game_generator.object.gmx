@@ -286,7 +286,9 @@ with(obj_pedestal)
 }    
 
 instance_create(0, 0, obj_globals);
-//ds_list_add(global.collected_letters, spr_compass);
+ds_list_add(global.collected_letters, spr_map_collect);
+ds_list_add(global.collected_letters, spr_compass);
+ds_list_add(global.collected_letters, spr_sail);
 //instance_destroy();
 
 var spawnx = 2000;
