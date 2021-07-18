@@ -175,6 +175,14 @@ if(letter != -1)
     if (activated and spin &lt; 45)
     {
         spin += .15;    
+        with(obj_tree_test)
+        {
+            if (distance_to_object(other.id) &lt; 50)
+            {
+                if (image_alpha &gt; .2)
+                    image_alpha -= .005;
+            }
+        }
     }
     else if (activated and spin &gt;= 45)
     {

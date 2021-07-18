@@ -67,7 +67,7 @@ if (instance_exists(obj_player))
 if (instance_exists(obj_boat))
 {
     focus = obj_boat;
-    zoom_target = 2.1;
+    //zoom_target = 2.1;
 }
 
 var x_target = x;
@@ -86,8 +86,16 @@ with(focus)
     else
     if (instance_exists(focus))
     {
-        x_target = x + lengthdir_x(10*other.zoom, dir);
-        y_target = y + lengthdir_y(10*other.zoom, dir);
+        if (focus == obj_boat)
+        {
+            x_target = x + lengthdir_x(20*spd*other.zoom, dir);
+            y_target = y + lengthdir_y(20*spd*other.zoom, dir);
+        }
+        else
+        {
+            x_target = x + lengthdir_x(10*other.zoom, dir);
+            y_target = y + lengthdir_y(10*other.zoom, dir);
+        }
     }
 }
 

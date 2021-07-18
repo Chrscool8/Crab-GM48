@@ -78,7 +78,7 @@ draw_clear_alpha(c_white, 0);
 with(obj_tree_test)
 {
     
-    if (instance_exists(obj_camera) and distance_to_object(obj_camera)&lt;700*zoom)
+    if (instance_exists(obj_camera) and distance_to_object(obj_camera)&lt;850*zoom)
     {
         var xx1 = (x-view_xview+(wid)-16)/zoom*quality_scale;
         var yy1 = (y-view_yview+(hei)+74)/zoom*quality_scale;

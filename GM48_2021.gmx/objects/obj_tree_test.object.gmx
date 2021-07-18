@@ -55,7 +55,7 @@ depth = -y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(sprite_index, 1, x, y);
+            <string>draw_sprite_ext(sprite_index, 1, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
 //draw_sprite_ext(sprite_index, 1, x, y, image_xscale, image_yscale, image_angle, c_black, darkness);
 </string>
           </argument>
@@ -79,7 +79,7 @@ depth = -y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(sprite_index, 0, x, y);
+            <string>draw_sprite_ext(sprite_index, 0, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
 draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_black, darkness);
 </string>
           </argument>
