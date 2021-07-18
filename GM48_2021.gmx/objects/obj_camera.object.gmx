@@ -56,7 +56,7 @@ zoom = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>zoom = ((keyboard_check(vk_control)) + 1 - (.5*keyboard_check(vk_shift)) + zoom * (slide_speed/2))/(slide_speed/2+1);
+            <string>var zoom_target = (keyboard_check(vk_control)) + 1 - (.5*keyboard_check(vk_shift));
 
 var focus = -1;
 
@@ -66,12 +66,32 @@ if (instance_exists(obj_player))
 if (instance_exists(obj_boat))
     focus = obj_boat;
 
-if (instance_exists(focus))
+var x_target = x;
+var y_target = y;
+    
+with(focus)
 {
-    x = ((focus.x + lengthdir_x(10*zoom, focus.dir)) + x*(slide_speed))/(slide_speed+1);
-    y = ((focus.y + lengthdir_y(10*zoom, focus.dir)) + y*(slide_speed))/(slide_speed+1);
+    var obj = instance_nearest(x, y, obj_pedestal);
+    var dis = 300;
+    if (instance_exists(obj_pedestal) and distance_to_object(obj)&lt;dis)
+    {
+        var dis = 1-(distance_to_object(obj)/dis);
+        x_target = lerp(x, obj.x, dis);
+        y_target = lerp(y, obj.y, dis);
+    }
+    else
+    if (instance_exists(focus))
+    {
+        x_target = x + lengthdir_x(10*other.zoom, dir);
+        y_target = y + lengthdir_y(10*other.zoom, dir);
+    }
 }
 
+zoom = (zoom_target + zoom * (slide_speed/2))/(slide_speed/2+1);
+
+x = (x_target + x*(slide_speed))/(slide_speed+1);
+y = (y_target + y*(slide_speed))/(slide_speed+1);
+    
 view_wview = 640 * clamp(zoom, .5, 2);
 view_hview = 480 * clamp(zoom, .5, 2)
 
