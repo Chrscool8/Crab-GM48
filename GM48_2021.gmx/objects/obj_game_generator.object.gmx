@@ -43,7 +43,8 @@ enum cell_types
 {
     land, 
     water,
-    decorative
+    decorative,
+    altar
 };
 
 global.collectables = ds_list_create();
@@ -52,7 +53,7 @@ ds_list_add(global.collectables, spr_map_collect, spr_sail, spr_compass, spr_bin
 ds_grid_set_region(map_data, 0, 0, map_width, map_height, 1);
 
 var interests = ds_list_create();
-ds_list_add(interests, 0, 1, 2, 3, 4, 5, 6, 7);
+ds_list_add(interests, 0, 1, 2, 3, 4, 5, 6, 7, 8);
 ds_list_shuffle(interests);
 var num_islands = ds_list_size(interests);
 
@@ -108,6 +109,13 @@ for(var i = 0; i &lt; num_islands; i++)
                     var h = instance_create((xx+.5) * cell_size, (yy+.5) * cell_size, obj_pedestal);
                     h.letter = spr_map_collect;
                     h.upgrade_platform = true;
+                break;
+                case 8: 
+                    //var h = instance_create((xx+.5) * cell_size, (yy+.5) * cell_size, obj_pedestal);
+                    //h.letter = spr_map_collect;
+                    //h.upgrade_platform = true;
+                    instance_create((xx+.5) * cell_size, (yy+.5) * cell_size, obj_altar);
+                    ds_grid_set(map_data, xx, yy, cell_types.altar);
                 break;
             }             
             
@@ -192,7 +200,7 @@ for(var i = 0; i &lt; map_width; i++)
             h.image_xscale = cell_size/32;
             h.image_yscale = cell_size/32;
         }       
-        else
+        else 
         {
             var left = ds_grid_get(map_data, i-1, j);
             var right = ds_grid_get(map_data, i+1, j);
@@ -344,7 +352,9 @@ instance_create(spawnx, spawny, obj_boat);
                     draw_set_color(c_black);
                 }
                 
+                draw_set_alpha(.85);
                 draw_rectangle(view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + i*cel_size+cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size+cel_size/2 - (map_height*cel_size/2), false);
+                draw_set_alpha(1);
             }
         }
         draw_set_color(c_black);

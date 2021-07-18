@@ -94,7 +94,7 @@ if (vsp &lt; 0)
     else if (hsp &gt; 0)
     {
         sprite_index = spr_player_new_upright
-        dir = 90+45;
+        dir = 90-45;
     }
 }
 else if (vsp &gt; 0)

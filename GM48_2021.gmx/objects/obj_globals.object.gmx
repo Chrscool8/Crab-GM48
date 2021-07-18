@@ -61,8 +61,9 @@ audio_sound_gain(a, .5, 1);
 
 
 alarm[1] = room_speed * 10;
+alarm[2] = room_speed * 20;
+alarm[3] = room_speed * .5;
 
-alert("You can use the arrow keys or WASD to control your character!", room_speed*5);
 
 /*if (!settings[? "tip_movement"])
 {
@@ -70,6 +71,52 @@ alert("You can use the arrow keys or WASD to control your character!", room_spee
 
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alert("You can use the arrow keys or WASD to control your character!", room_speed*5);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alert("You can press CTRL or SHIFT to zoom the view!", room_speed*5);
 </string>
           </argument>
         </arguments>
@@ -328,30 +375,7 @@ if (keyboard_check_pressed(ord("0")))
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="82">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>game_restart();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="78">
+    <event eventtype="9" enumb="112">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -370,29 +394,6 @@ if (keyboard_check_pressed(ord("0")))
             <kind>1</kind>
             <string>var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure, msc_lullaby, msc_promenade, msc_sandcastles), true);
 audio_sound_gain(a, .5, 1);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="27">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>game_end();
 </string>
           </argument>
         </arguments>

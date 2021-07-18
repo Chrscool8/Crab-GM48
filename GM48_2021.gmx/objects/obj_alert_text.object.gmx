@@ -29,6 +29,8 @@
 spd = 0;
 str = "";
 persist = 0;
+
+sfx_player_play(snd_notif, .5, false);
 </string>
           </argument>
         </arguments>
@@ -61,6 +63,8 @@ else
     yy += spd;
 }
 depth = yy;
+
+draw_sprite_ext(spr_shade, 0, 0, 30+yy, view_wport/30, 2, 0, c_white, 1);
 
 draw_set_font(font0);
 draw_text_outline(10, yy, str, 1, c_black, c_white, 0);
