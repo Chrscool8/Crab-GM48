@@ -27,9 +27,10 @@
             <kind>1</kind>
             <string>randomize();
  
-map_width = 20;
-map_height = 20;
+map_width = 24;
+map_height = 24;
 cell_size = 512;
+var edge_buffer = 2;
 
 map_data = ds_grid_create(map_width, map_height);
 
@@ -58,8 +59,8 @@ for(var i = 0; i &lt; num_islands; i++)
     var ticker = 0;
     while(ticker &lt; 100000)
     {
-        var xx = floor(random(map_width-2))+1;
-        var yy = floor(random(map_height-2))+1;
+        var xx = floor(random(map_width-edge_buffer*2))+edge_buffer;
+        var yy = floor(random(map_height-edge_buffer*2))+edge_buffer;
         
         if (ds_grid_get(map_data, xx, yy) == cell_types.water)
         {
@@ -107,9 +108,9 @@ for(var i = 0; i &lt; num_islands; i++)
                 {
                     for(var l=0; l&lt;yw; l++)
                     {
-                        if (ds_grid_get(map_data, clamp(xoff+xx+k, 1, map_width-1), clamp(yoff+yy+l, 1, map_height-1)) == cell_types.water)
+                        if (ds_grid_get(map_data, clamp(xoff+xx+k, edge_buffer, map_width-edge_buffer), clamp(yoff+yy+l, edge_buffer, map_height-edge_buffer)) == cell_types.water)
                         {
-                            ds_grid_set(map_data, clamp(xoff+xx+k, 1, map_width-1), clamp(yoff+yy+l, 1, map_height-1), cell_types.decorative);    
+                            ds_grid_set(map_data, clamp(xoff+xx+k, edge_buffer, map_width-edge_buffer), clamp(yoff+yy+l, edge_buffer, map_height-edge_buffer), cell_types.decorative);    
                         }
                     }
                 }
@@ -133,9 +134,9 @@ for(var i = 0; i &lt; num_islands; i++)
                             else                    
                                 yy_off = choose(-1, 1);
                                 
-                            if (ds_grid_get(map_data, clamp(xx+xx_off, 1, map_width-1), clamp(yy+yy_off, 1, map_height-1)) == cell_types.water)
+                            if (ds_grid_get(map_data, clamp(xx+xx_off, edge_buffer, map_width-edge_buffer), clamp(yy+yy_off, edge_buffer, map_height-edge_buffer)) == cell_types.water)
                             {
-                                ds_grid_set(map_data, clamp(xx+xx_off, 1, map_width-1), clamp(yy+yy_off, 1, map_height-1), cell_types.decorative);    
+                                ds_grid_set(map_data, clamp(xx+xx_off, edge_buffer, map_width-edge_buffer), clamp(yy+yy_off, edge_buffer, map_height-edge_buffer), cell_types.decorative);    
                                 xx = clamp(xx+xx_off, 0, map_width);
                                 yy = clamp(yy+yy_off, 0, map_height);
                             }

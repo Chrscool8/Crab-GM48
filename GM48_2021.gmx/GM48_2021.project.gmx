@@ -70,6 +70,8 @@
     <sprite>sprites\spr_cross</sprite>
     <sprite>sprites\spr_compass_icon</sprite>
     <sprite>sprites\spr_compass</sprite>
+    <sprite>sprites\spr_fish0</sprite>
+    <sprite>sprites\spr_splash</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -120,6 +122,7 @@
     <object>objects\obj_tree_generator</object>
     <object>objects\obj_alert_text</object>
     <object>objects\obj_pedestal</object>
+    <object>objects\obj_fish</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

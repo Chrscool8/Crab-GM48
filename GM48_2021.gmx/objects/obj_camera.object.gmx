@@ -65,7 +65,10 @@ if (instance_exists(obj_player))
     focus = obj_player;
 
 if (instance_exists(obj_boat))
+{
     focus = obj_boat;
+    zoom_target = 2.1;
+}
 
 var x_target = x;
 var y_target = y;
@@ -88,13 +91,14 @@ with(focus)
     }
 }
 
-zoom = (zoom_target + zoom * (slide_speed/2))/(slide_speed/2+1);
+zoom = (zoom_target + zoom * (slide_speed*2))/(slide_speed*2+1);
+zoom = clamp(zoom, .5, 2);
 
 x = (x_target + x*(slide_speed))/(slide_speed+1);
 y = (y_target + y*(slide_speed))/(slide_speed+1);
     
 view_wview = 640 * zoom; // * clamp(zoom, .5, 2);
-view_hview = 480 * zoom; //clamp(zoom, .5, 2);
+view_hview = 480 * zoom; // *clamp(zoom, .5, 2);
 
 view_xview = x - view_wview/2;
 view_yview = y - view_hview/2;
