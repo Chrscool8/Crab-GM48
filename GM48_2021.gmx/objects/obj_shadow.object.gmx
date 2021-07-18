@@ -96,6 +96,13 @@ with(obj_player)
     draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale*1.1, image_yscale*-.6/zoom*quality_scale, -20, c_black, 1);   
 }
 
+/*with(obj_fish)
+{
+    var xx1 = (x-view_xview+(wid))/zoom*quality_scale;
+    var yy1 = (ystart-view_yview+(hei)-1)/zoom*quality_scale;
+    draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale*1.1, image_yscale*-.6/zoom*quality_scale, -20, c_black, 1);
+}*/
+
 //draw_set_colour_write_enable(true, true, true, false);
 /*with(obj_wake)
 {
