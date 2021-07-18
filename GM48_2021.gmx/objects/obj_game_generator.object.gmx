@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>randomize();
  
-map_width = 24;
-map_height = 24;
+map_width = 36;
+map_height = 36;
 cell_size = 512;
 var edge_buffer = 4;
 
@@ -48,11 +48,10 @@ enum cell_types
 
 ds_grid_set_region(map_data, 0, 0, map_width, map_height, 1);
 
-var num_islands = 5;
-
 var interests = ds_list_create();
-ds_list_add(interests, 0, 1, 2, 3, 4);
+ds_list_add(interests, 0, 1, 2, 3, 4, 5, 6);
 ds_list_shuffle(interests);
+var num_islands = ds_list_size(interests);
 
 for(var i = 0; i &lt; num_islands; i++)
 {   
@@ -89,21 +88,32 @@ for(var i = 0; i &lt; num_islands; i++)
                 break;
                 case 4: 
                     var h = instance_create((xx+.5) * cell_size, (yy+.5) * cell_size, obj_pedestal);
+                    h.letter = spr_compass;
+                    h.upgrade_platform = true;
+                break;
+                case 5: 
+                    var h = instance_create((xx+.5) * cell_size, (yy+.5) * cell_size, obj_pedestal);
                     h.letter = spr_sail;
+                    h.upgrade_platform = true;
+                break;
+                case 6: 
+                    var h = instance_create((xx+.5) * cell_size, (yy+.5) * cell_size, obj_pedestal);
+                    h.letter = spr_bino;
+                    h.upgrade_platform = true;
                 break;
             }             
             
             var prev_xx = xx;
             var prev_yy = yy;
             
-            var isle_kind = 1 ;//choose(0, 1, 2, 3);
+            var isle_kind = choose(0, 1, 1, 1,1, 1, 1,1, 1, 1,1, 1, 1, 1, 1, 3);
             
             if (isle_kind == 1)
             {
-                var xoff = choose(0, -1);
-                var yoff = choose(0, -1);
-                var xw = choose(2, 3);
-                var yw = choose(2, 3);
+                var xoff = choose(0, -2);
+                var yoff = choose(0, -2);
+                var xw = choose(3, 4);
+                var yw = choose(3, 4);
                 for(var k=0; k&lt;xw; k++)
                 {
                     for(var l=0; l&lt;yw; l++)
@@ -118,12 +128,12 @@ for(var i = 0; i &lt; num_islands; i++)
             
             if (isle_kind == 3)
             {
-                repeat(3)
+                repeat(5)
                 {       
                     var snaking = true;
                     while(snaking)
                     {
-                        if (random(7)&lt;1)
+                        if (random(3) &lt; 1)
                         {   
                             var xx_off = 0;
                             var yy_off = 0;
@@ -211,11 +221,11 @@ for(var i = 0; i &lt; map_width; i++)
     for(var j = 0; j &lt; map_height; j++)
     {
         var type = ds_grid_get(map_data, i, j);
-        if (type == cell_types.land)
+        if (type == cell_types.land || type == cell_types.decorative)
         {
-            repeat(random(10))
+            repeat(random(3))
             {   
-                repeat(30)
+                repeat(10)
                 {
                     var xxx = random_range(i * cell_size, (i+1) * cell_size);
                     var yyy = random_range(j * cell_size, (j+1) * cell_size);
@@ -249,7 +259,7 @@ for(var i = 0; i &lt; map_width; i++)
 }
 
 instance_create(0, 0, obj_globals);
-ds_list_add(global.collected_letters, spr_compass);
+//ds_list_add(global.collected_letters, spr_compass);
 //instance_destroy();
 
 var spawnx = 2000;
@@ -257,6 +267,7 @@ var spawny = 2000;
 
 instance_create(spawnx, spawny, obj_camera);
 instance_create(0, 0, obj_water_renderer);
+instance_create(0, 0, obj_shadow);
 instance_create(spawnx, spawny, obj_boat);
 </string>
           </argument>
@@ -288,7 +299,7 @@ else
 if (map_draw_y &lt; view_hport*1.3)
 {
     draw_sprite_ext(spr_map, 0, view_wport/2, map_draw_y, 4, 4, 0, c_white, 1);
-    var cel_size = 16;
+    var cel_size = 12;
       
     for(var i = 2; i &lt; map_width-2; i++)
     {
@@ -308,7 +319,9 @@ if (map_draw_y &lt; view_hport*1.3)
                 draw_set_color(c_green);
             }
             else
+            {
                 draw_set_color(c_black);
+            }
             
             draw_rectangle(view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + i*cel_size+cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size+cel_size/2 - (map_height*cel_size/2), false);
         }

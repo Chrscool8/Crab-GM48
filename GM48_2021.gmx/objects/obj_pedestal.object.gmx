@@ -36,6 +36,8 @@ spin = 1;
 collected = false;
 
 was_letter = -1;
+
+upgrade_platform = false;
 </string>
           </argument>
         </arguments>

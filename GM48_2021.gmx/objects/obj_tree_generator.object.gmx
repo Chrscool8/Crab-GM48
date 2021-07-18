@@ -60,8 +60,16 @@ for(var i = 0; i &lt; 1; i += .2)
         var yy = y + lengthdir_y(dis, dir) + irandom_range(-50, 50);
         if (!collision_circle(xx, yy, 100, par_water, true, true))
         {
-            var ob = instance_nearest(xx, yy, obj_tree_test);
-            if (point_distance(xx, yy, ob.x, ob.y)&gt;10)
+            if (instance_exists(obj_tree_test))
+            {
+                var ob = instance_nearest(xx, yy, obj_tree_test);
+                if (point_distance(xx, yy, ob.x, ob.y)&gt;10)
+                {
+                    var h = instance_create(xx, yy, obj_tree_test);
+                    h.darkness = (1-i)/2;
+                }
+            }
+            else
             {
                 var h = instance_create(xx, yy, obj_tree_test);
                 h.darkness = (1-i)/2;

@@ -48,15 +48,61 @@ global.collected_letters = ds_list_create();
 
 settings[? "music_on"] = 1;
 settings[? "sound_on"] = 1;
-
 settings[? "last_playing_track"] = -1;
+
+settings[? "tip_gulls"] = false;
 
 global.emitter_music = audio_emitter_create();
 global.emitter_sfx = audio_emitter_create();
 
-var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure), true);
-audio_sound_gain(a, 0, 1);
+var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure, msc_lullaby, msc_promenade, msc_sandcastles), true);
+audio_sound_gain(a, .5, 1);
 
+
+alarm[1] = room_speed * 5;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// gull
+
+alarm[1] = room_speed * (30+random(20));
+with(obj_camera)
+{
+    var h = instance_create(x, y, obj_gulls);
+    
+    if (instance_exists(obj_pedestal))
+    {
+        var nearest = instance_nearest(x, y, obj_pedestal);
+        var dir = point_direction(x, y, nearest.x, nearest.y);
+        h.dir = dir;
+    }
+}
+
+if (!settings[? "tip_gulls"])
+{
+    settings[? "tip_gulls"] = true;
+    alert("Flying gulls may give you a hint where shore is from time to time!", room_speed*4);
+}
 </string>
           </argument>
         </arguments>
@@ -287,6 +333,30 @@ if (keyboard_check_pressed(ord("0")))
           <argument>
             <kind>1</kind>
             <string>game_restart();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="78">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure, msc_lullaby, msc_promenade, msc_sandcastles), true);
+audio_sound_gain(a, .5, 1);
 </string>
           </argument>
         </arguments>

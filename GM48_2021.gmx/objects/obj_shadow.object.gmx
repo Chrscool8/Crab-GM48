@@ -109,6 +109,29 @@ with(obj_fish)
     }
     //draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale*1.1, image_yscale*-.6/zoom*quality_scale, -20, c_black, 1);
 }
+with(obj_gulls)
+{
+    if (instance_exists(obj_camera))
+    {
+        var dis = (progress-.5)*view_wview*2;
+        
+        var xx1 = ((obj_camera.x + lengthdir_x(dis, dir))-view_xview+(wid))/zoom*quality_scale;
+        var yy1 = ((obj_camera.y + lengthdir_y(dis, dir))-view_yview+(hei))/zoom*quality_scale;
+        
+        draw_sprite_ext(spr_gull, 0, xx1, yy1, 1/zoom*quality_scale, 1/zoom*quality_scale, dir, c_black, 1);
+        
+        if (progress &lt; 1.5)
+        {
+            //progress += .004;
+        }
+        else
+        {
+            //instance_destroy();
+        }
+    }
+    else
+        instance_destroy();
+}
 
 //draw_set_colour_write_enable(true, true, true, false);
 /*with(obj_wake)

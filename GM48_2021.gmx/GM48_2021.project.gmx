@@ -6,14 +6,17 @@
   <NewExtensions/>
   <sounds name="sound">
     <sound>sound\msc_crab_chase</sound>
-    <sound>sound\msc_trapped_at_ocean</sound>
-    <sound>sound\msc_ocean_adventure</sound>
     <sound>sound\msc_lullaby</sound>
+    <sound>sound\msc_ocean_adventure</sound>
+    <sound>sound\msc_promenade</sound>
+    <sound>sound\msc_sandcastles</sound>
+    <sound>sound\msc_trapped_at_ocean</sound>
     <sound>sound\snd_activate_stone</sound>
-    <sound>sound\snd_womwomwom</sound>
+    <sound>sound\snd_collect</sound>
     <sound>sound\snd_puff</sound>
     <sound>sound\snd_puff2</sound>
-    <sound>sound\snd_collect</sound>
+    <sound>sound\snd_womwomwom</sound>
+    <sound>sound\snd_seagull</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
@@ -74,6 +77,8 @@
     <sprite>sprites\spr_fish1</sprite>
     <sprite>sprites\spr_splash</sprite>
     <sprite>sprites\spr_sail</sprite>
+    <sprite>sprites\spr_bino</sprite>
+    <sprite>sprites\spr_gull</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -125,6 +130,7 @@
     <object>objects\obj_alert_text</object>
     <object>objects\obj_pedestal</object>
     <object>objects\obj_fish</object>
+    <object>objects\obj_gulls</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
