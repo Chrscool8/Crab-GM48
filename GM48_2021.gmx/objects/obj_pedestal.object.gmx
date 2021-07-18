@@ -114,6 +114,21 @@ switch (was_letter)
     default: break;
 }
  
+if (upgrade_platform)
+{
+    upgrade_platform = false;
+    ds_list_delete(global.collectables, 0);
+    with(obj_pedestal)
+    {
+        if (upgrade_platform)
+        {
+            if (not ds_list_empty(global.collectables))
+                letter = ds_list_find_value(global.collectables, 0);
+            else
+                letter = -1;
+        }    
+    }        
+}
 </string>
           </argument>
         </arguments>
