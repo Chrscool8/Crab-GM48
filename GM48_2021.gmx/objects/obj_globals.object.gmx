@@ -53,6 +53,7 @@ settings[? "last_playing_track"] = -1;
 settings[? "tip_gulls"] = false;
 settings[? "tip_zoom"] = false;
 settings[? "tip_beach"] = false;
+settings[? "tip_altar"] = false;
 //settings[? "tip_movement"] = false;
 
 global.emitter_music = audio_emitter_create();
@@ -124,24 +125,15 @@ alarm[1] = room_speed * (30+random(20));
 
 if (instance_exists(obj_boat))
 {
-    with(obj_camera)
+    send_gull();
+    if (!settings[? "tip_gulls"])
     {
-        var h = instance_create(x, y, obj_gulls);
-        
-        if (instance_exists(obj_pedestal))
-        {
-            var nearest = instance_nearest(x, y, obj_pedestal);
-            var dir = point_direction(x, y, nearest.x, nearest.y);
-            h.dir = dir;
-        }
+        settings[? "tip_gulls"] = true;
+        alert("Flying gulls may give you a hint where land is from time to time!", room_speed*4);
     }
 }
 
-if (!settings[? "tip_gulls"])
-{
-    settings[? "tip_gulls"] = true;
-    alert("Flying gulls may give you a hint where land is from time to time!", room_speed*4);
-}
+
 </string>
           </argument>
         </arguments>

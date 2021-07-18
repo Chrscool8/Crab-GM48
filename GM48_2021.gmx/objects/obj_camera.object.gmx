@@ -98,6 +98,12 @@ with(focus)
         x_target = lerp(x, obj.x, dis);
         y_target = lerp(y, obj.y, dis);
     }
+    else if (instance_exists(obj_altar) and distance_to_object(obj)&lt;dis*2)
+    {
+        var dis = 1-(distance_to_object(obj)/dis*2);
+        x_target = lerp(x, obj.x, dis*2);
+        y_target = lerp(y, obj.y, dis*2);
+    }
     else
     if (instance_exists(focus))
     {
