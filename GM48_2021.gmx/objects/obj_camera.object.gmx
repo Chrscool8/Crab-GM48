@@ -56,7 +56,7 @@ zoom = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var zoom_target = (keyboard_check(vk_control)*40) + 1 - (.5*keyboard_check(vk_shift));
+            <string>var zoom_target = (keyboard_check(vk_control)) + 1 - (.5*keyboard_check(vk_shift));
 
 var focus = -1;
 

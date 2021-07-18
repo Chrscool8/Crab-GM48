@@ -58,10 +58,14 @@
     <sprite>sprites\spr_water_curve_edge_2</sprite>
     <sprite>sprites\spr_water_curve_edge_3</sprite>
     <sprites name="pedestal">
+      <sprite>sprites\spr_ped_glow</sprite>
       <sprite>sprites\spr_pedestal</sprite>
       <sprite>sprites\spr_letter_C</sprite>
-      <sprite>sprites\spr_ped_glow</sprite>
+      <sprite>sprites\spr_letter_R</sprite>
+      <sprite>sprites\spr_letter_A</sprite>
+      <sprite>sprites\spr_letter_B</sprite>
     </sprites>
+    <sprite>sprites\spr_map</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -83,6 +87,7 @@
     <font>fonts\font0</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_game_generator</object>
     <object>objects\obj_globals</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_player</object>
@@ -90,11 +95,11 @@
     <objects name="water">
       <object>objects\par_water</object>
       <object>objects\obj_water</object>
-      <object>objects\obj_water_edge</object>
-      <object>objects\object18</object>
-      <object>objects\object19</object>
-      <object>objects\object20</object>
-      <object>objects\object21</object>
+      <object>objects\obj_water_edge_test</object>
+      <object>objects\obj_water_edge_top_left</object>
+      <object>objects\obj_water_edge_top_right</object>
+      <object>objects\obj_water_edge_bottom_left</object>
+      <object>objects\obj_water_edge_bottom_right</object>
     </objects>
     <object>objects\obj_sand</object>
     <object>objects\obj_hermit</object>

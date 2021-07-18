@@ -30,7 +30,7 @@ spd = 0;
 surf = -1;
 sep = 2;
 ticker = 0;
-max_spd = 5;
+max_spd = 15;
 </string>
           </argument>
         </arguments>

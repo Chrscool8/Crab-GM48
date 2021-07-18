@@ -58,7 +58,7 @@ for(var i = 0; i &lt; 1; i += .2)
         var dis = sqr(i)*creation_size;
         var xx = x + lengthdir_x(dis, dir) + irandom_range(-50, 50);
         var yy = y + lengthdir_y(dis, dir) + irandom_range(-50, 50);
-        if (!collision_circle(xx, yy, 50, par_water, true, true))
+        if (!collision_circle(xx, yy, 100, par_water, true, true))
         {
             if (distance_to_object(instance_nearest(xx, yy, obj_tree_test)&gt;50))
             {
@@ -146,7 +146,7 @@ if (my_sprite == -1)
                     var dis = sqr(i)*creation_size;
                     var xx = x + lengthdir_x(dis, dir) + irandom_range(-50, 50);
                     var yy = y + lengthdir_y(dis, dir) + irandom_range(-50, 50);
-                    if (!collision_circle(xx, yy, 20, par_water, true, true))
+                    if (!collision_circle(xx, yy, 40, par_water, true, true))
                     {
                         draw_sprite(spr_grass, random(sprite_get_number(spr_grass)), xx-x+surface_size/2, yy-y+surface_size/2)
                         //effect_create_above(ef_ring, xx, yy, 1, c_white);

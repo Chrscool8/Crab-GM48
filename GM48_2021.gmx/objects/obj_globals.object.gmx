@@ -54,7 +54,7 @@ global.emitter_music = audio_emitter_create();
 global.emitter_sfx = audio_emitter_create();
 
 var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure), true);
-audio_sound_gain(a, .5, 1);
+audio_sound_gain(a, 0, 1);
 
 </string>
           </argument>
@@ -279,7 +279,7 @@ if (keyboard_check_pressed(ord("5")))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure), true);
+            <string>/*var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure), true);
 audio_sound_gain(a, .5, 1);
 </string>
           </argument>
