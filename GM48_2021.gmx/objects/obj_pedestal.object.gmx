@@ -102,6 +102,15 @@ switch (was_letter)
     case spr_letter_B: 
         alert("You found the B!", room_speed*3);
     break;
+    case spr_sail: 
+        alert("You found the Sail! You can now sail faster.", room_speed*3);
+    break;
+    case spr_bino: 
+        alert("You found the Binoculars! You can now zoom out further with Ctrl.", room_speed*3);
+    break;
+    case spr_map_collect: 
+        alert("You found the Map! Hold the M key to view it.", room_speed*3);
+    break;
     default: break;
 }
  

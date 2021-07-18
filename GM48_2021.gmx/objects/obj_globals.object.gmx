@@ -51,6 +51,7 @@ settings[? "sound_on"] = 1;
 settings[? "last_playing_track"] = -1;
 
 settings[? "tip_gulls"] = false;
+//settings[? "tip_movement"] = false;
 
 global.emitter_music = audio_emitter_create();
 global.emitter_sfx = audio_emitter_create();
@@ -59,7 +60,15 @@ var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean
 audio_sound_gain(a, .5, 1);
 
 
-alarm[1] = room_speed * 5;
+alarm[1] = room_speed * 10;
+
+alert("You can use the arrow keys or WASD to control your character!", room_speed*5);
+
+/*if (!settings[? "tip_movement"])
+{
+
+
+}
 
 </string>
           </argument>
@@ -86,15 +95,19 @@ alarm[1] = room_speed * 5;
             <string>/// gull
 
 alarm[1] = room_speed * (30+random(20));
-with(obj_camera)
+
+if (instance_exists(obj_boat))
 {
-    var h = instance_create(x, y, obj_gulls);
-    
-    if (instance_exists(obj_pedestal))
+    with(obj_camera)
     {
-        var nearest = instance_nearest(x, y, obj_pedestal);
-        var dir = point_direction(x, y, nearest.x, nearest.y);
-        h.dir = dir;
+        var h = instance_create(x, y, obj_gulls);
+        
+        if (instance_exists(obj_pedestal))
+        {
+            var nearest = instance_nearest(x, y, obj_pedestal);
+            var dir = point_direction(x, y, nearest.x, nearest.y);
+            h.dir = dir;
+        }
     }
 }
 
