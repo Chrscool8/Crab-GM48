@@ -32,6 +32,7 @@ settings = ds_map_create();
 
 ds_map_add(settings, "water_shader", 2);
 ds_map_add(settings, "sand_shader", 2);
+ds_map_add(settings, "shadow_shader", 2);
 ds_map_add(settings, "surface_size", 1);
 
 globalvar key_left, key_right, key_up, key_down;
@@ -161,7 +162,36 @@ if (keyboard_check_pressed(ord("2")))
     alert("Sand Shader Quality: "+string(settings[? "sand_shader"])+", default: 2");
 }
 
+/*if (keyboard_check_pressed(ord("3")))
+{
+    settings[? "shadow_shader"] = (settings[? "shadow_shader"]-2+4) mod 3;
+    alert("Shadow Shader Quality: "+string(settings[? "shadow_shader"])+", default: 2");
+}*/
+
 if (keyboard_check_pressed(ord("3")))
+{
+    switch (settings[? "shadow_shader"])
+    {
+        case -1: 
+            settings[? "shadow_shader"] = 2; 
+        break;
+        case 0: 
+            settings[? "shadow_shader"] = -1; 
+        break;
+        case 1: 
+            settings[? "shadow_shader"] = 0; 
+        break;
+        case 2: 
+            settings[? "shadow_shader"] = 1; 
+        break;
+        default:         
+            settings[? "shadow_shader"] = 2; 
+    }
+    
+    alert("Shadow Shader Quality: "+string(settings[? "shadow_shader"])+", default: 2");
+}
+
+if (keyboard_check_pressed(ord("4")))
 {
     switch (settings[? "surface_size"])
     {
@@ -181,7 +211,7 @@ if (keyboard_check_pressed(ord("3")))
     alert("Surface Size Mult: "+string(settings[? "surface_size"])+"x, default: 1");
 }
 
-if (keyboard_check_pressed(ord("4")))
+if (keyboard_check_pressed(ord("9")))
 {
     switch (settings[? "music_on"])
     {
@@ -208,7 +238,7 @@ if (keyboard_check_pressed(ord("4")))
     alert("Music Volume: "+string(settings[? "music_on"])+", default: 1");
 }
 
-if (keyboard_check_pressed(ord("5")))
+if (keyboard_check_pressed(ord("0")))
 {
     switch (settings[? "sound_on"])
     {
