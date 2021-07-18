@@ -160,6 +160,8 @@ else
 }
 
 depth = -y;
+
+wrap();
 </string>
           </argument>
         </arguments>

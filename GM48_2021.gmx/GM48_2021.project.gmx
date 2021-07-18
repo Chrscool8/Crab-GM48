@@ -95,6 +95,7 @@
     <script>scripts\sfx_player_play.gml</script>
     <script>scripts\send_gull.gml</script>
     <script>scripts\has_item.gml</script>
+    <script>scripts\wrap.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\just_blur.shader</shader>
