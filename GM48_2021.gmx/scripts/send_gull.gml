@@ -1,13 +1,17 @@
 var closest = -1;
 var close_dist = -1;
+var id1 = 0;
+var id2 = 0;
 
 with(obj_camera)
 {
+    id1 = id;
     with(obj_pedestal)
     {
+        id2 = id;
         if (letter != -1)
         {
-            var d = point_distance(other.x, other.y, x, y);
+            var d = point_distance(id2.x, id2.y, id1.x, id1.y);
             if (closest == -1)
             {
                 closest = id;

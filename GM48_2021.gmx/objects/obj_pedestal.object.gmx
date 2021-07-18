@@ -60,7 +60,8 @@ upgrade_platform = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>surface_free(surf);
+            <string>if surface_exists(surf)
+    surface_free(surf);
 </string>
           </argument>
         </arguments>

@@ -59,7 +59,7 @@ settings[? "tip_altar"] = false;
 global.emitter_music = audio_emitter_create();
 global.emitter_sfx = audio_emitter_create();
 
-var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure, msc_lullaby, msc_promenade, msc_sandcastles), true);
+var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure, msc_lullaby, msc_promenade, msc_sandcastles, msc_crab_cave, msc_mystery, msc_crab_ocean), true);
 //audio_sound_gain(a, .5, 1);
 
 alarm[5] = 1;
@@ -91,7 +91,7 @@ alarm[4] = room_speed * 3 * 60;
             <kind>1</kind>
             <string>alert("You can use the arrow keys or WASD to control your character!",   room_speed*15);
 alert("  ", room_speed*15);
-alert("but you are determined to explore this place and seek return of a terrible loss.",     room_speed*15);
+alert("but you are determined to explore this place and seek the return of a terrible loss.",     room_speed*15);
 alert("before, but something seems off. The islands are never where you once thought they were", room_speed*15);
 alert("A tall tale describes of a set of relics in this area that can grant wishes. You've been here",  room_speed*15);
 
@@ -117,7 +117,7 @@ alert("A tall tale describes of a set of relics in this area that can grant wish
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure, msc_lullaby, msc_promenade, msc_sandcastles), true);
+            <string>var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure, msc_lullaby, msc_promenade, msc_sandcastles, msc_crab_cave, msc_mystery, msc_crab_ocean), true);
 //audio_sound_gain(a, .5, 1);
 
 alarm[4] = room_speed * 3 * 60;
@@ -438,6 +438,29 @@ ds_list_add(global.collected_letters, spr_letter_B);
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="113">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>game_restart();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="112">
       <action>
         <libid>1</libid>
@@ -455,7 +478,7 @@ ds_list_add(global.collected_letters, spr_letter_B);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure, msc_lullaby, msc_promenade, msc_sandcastles), true);
+            <string>var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure, msc_lullaby, msc_promenade, msc_sandcastles, msc_crab_cave, msc_mystery, msc_crab_ocean), true);
 audio_sound_gain(a, .5, 1);
 </string>
           </argument>

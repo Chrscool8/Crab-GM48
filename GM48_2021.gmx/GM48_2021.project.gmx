@@ -5,19 +5,22 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound">
+    <sound>sound\msc_crab_cave</sound>
     <sound>sound\msc_crab_chase</sound>
+    <sound>sound\msc_crab_ocean</sound>
     <sound>sound\msc_lullaby</sound>
+    <sound>sound\msc_mystery</sound>
     <sound>sound\msc_ocean_adventure</sound>
     <sound>sound\msc_promenade</sound>
     <sound>sound\msc_sandcastles</sound>
     <sound>sound\msc_trapped_at_ocean</sound>
     <sound>sound\snd_activate_stone</sound>
     <sound>sound\snd_collect</sound>
+    <sound>sound\snd_notif</sound>
     <sound>sound\snd_puff</sound>
     <sound>sound\snd_puff2</sound>
-    <sound>sound\snd_womwomwom</sound>
     <sound>sound\snd_seagull</sound>
-    <sound>sound\snd_notif</sound>
+    <sound>sound\snd_womwomwom</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
@@ -84,6 +87,8 @@
     <sprite>sprites\spr_altar</sprite>
     <sprite>sprites\spr_shade</sprite>
     <sprite>sprites\spr_baby</sprite>
+    <sprite>sprites\spr_crab_body</sprite>
+    <sprite>sprites\spr_crab_hands</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -141,6 +146,7 @@
     <object>objects\obj_fish</object>
     <object>objects\obj_gulls</object>
     <object>objects\obj_altar</object>
+    <object>objects\obj_crab</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
