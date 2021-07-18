@@ -34,6 +34,7 @@ if (instance_exists(obj_player))
 }
 
 zoom = 1;
+surf = -1;
 </string>
           </argument>
         </arguments>
@@ -120,6 +121,33 @@ view_yview = y - view_hview/2;
           <argument>
             <kind>1</kind>
             <string>draw_text(10, 10, string(fps)+" / "+string(fps_real));
+
+for (var j = 0; j &lt; ds_list_size(global.collected_letters); j++)
+{
+    var sep = 1;
+    if (not surface_exists(surf))
+    {
+        surf = surface_create(128, 128);
+    }
+    
+    surface_set_target(surf);
+    draw_clear_alpha(c_white, 0);
+    var float = sin((current_time/700)-j*.5)*30;
+    
+    var iterations = 1;
+    //if (not activated)
+        draw_sprite_ext(ds_list_find_value(global.collected_letters, j), 1, 64, 64, 1, 1, float, c_black, .8);
+        
+    var iterations = 1;
+    for(var i = 0; i &lt; sprite_get_number(ds_list_find_value(global.collected_letters, j))*iterations; i++)
+    {
+        draw_sprite_ext(ds_list_find_value(global.collected_letters, j), i/iterations, 64, 64-sep*i/iterations, 1, 1, float, c_white, 1);
+    }
+    surface_reset_target();
+        
+    if (surface_exists(surf))  
+        draw_surface_ext(surf, 72 * j-270, view_hport - 290, 5, 5*.8, 0, c_white, 1);    
+}
 </string>
           </argument>
         </arguments>

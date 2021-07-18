@@ -66,6 +66,9 @@
       <sprite>sprites\spr_letter_B</sprite>
     </sprites>
     <sprite>sprites\spr_map</sprite>
+    <sprite>sprites\spr_cross</sprite>
+    <sprite>sprites\spr_compass_icon</sprite>
+    <sprite>sprites\spr_compass</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
