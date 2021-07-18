@@ -60,13 +60,13 @@ surf = -1;
             <string>var zoom_target = 1;
 if (keyboard_check(vk_control))
 {
-    if (ds_list_find_index(global.collected_letters, spr_sail) != -1)
+    if (ds_list_find_index(global.collected_letters, spr_bino) != -1)
     {
-        zoom_target = 3.1;
+        zoom_target = 3;
     }
     else
     {
-        zoom_target = 2.1;
+        zoom_target = 2;
     }
 }
 else if (keyboard_check(vk_shift))
@@ -173,7 +173,7 @@ for (var j = 0; j &lt; ds_list_size(global.collected_letters); j++)
     surface_reset_target();
         
     if (surface_exists(surf))  
-        draw_surface_ext(surf, 72 * j-265, view_hport - 300, 5, 5*.8, 0, c_white, 1);    
+        draw_surface_ext(surf, 78 * j-265, view_hport - 300, 5, 5*.8, 0, c_white, 1);    
 }
 </string>
           </argument>

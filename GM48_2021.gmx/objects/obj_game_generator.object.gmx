@@ -46,6 +46,9 @@ enum cell_types
     decorative
 };
 
+global.collectables = ds_list_create();
+ds_list_add(global.collectables, spr_map_collect, spr_sail, spr_compass, spr_bino);
+
 ds_grid_set_region(map_data, 0, 0, map_width, map_height, 1);
 
 var interests = ds_list_create();
@@ -262,6 +265,17 @@ for(var i = 0; i &lt; map_width; i++)
         }
     }
 }
+
+with(obj_pedestal)
+{
+    if (upgrade_platform)
+    {
+        if (not ds_list_empty(global.collectables))
+            letter = ds_list_find_value(global.collectables, 0);
+        else
+            letter = -1;
+    }    
+}    
 
 instance_create(0, 0, obj_globals);
 //ds_list_add(global.collected_letters, spr_compass);
