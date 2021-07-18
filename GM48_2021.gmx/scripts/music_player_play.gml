@@ -10,7 +10,7 @@ if (argument_count == 2)
     var aud = audio_play_sound_on(global.emitter_music, argument[0], argument[1], 1);
     settings[? "last_playing_track"] = aud;
     audio_sound_gain(aud, 0, 0);
-    audio_sound_gain(aud, 1, 1000);
+    audio_sound_gain(aud, .5, 1000);
     return aud;
 }
 else

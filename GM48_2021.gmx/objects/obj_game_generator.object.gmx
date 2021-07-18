@@ -286,13 +286,27 @@ with(obj_pedestal)
 }    
 
 instance_create(0, 0, obj_globals);
-ds_list_add(global.collected_letters, spr_map_collect);
-ds_list_add(global.collected_letters, spr_compass);
-ds_list_add(global.collected_letters, spr_sail);
+
 //instance_destroy();
 
 var spawnx = 2000;
 var spawny = 2000;
+
+var ticker = 0;
+while(ticker &lt; 100000)
+{
+    var xx = floor(random(map_width-edge_buffer*2-1+3))+edge_buffer;
+    var yy = floor(random(map_height-edge_buffer*2-1))+edge_buffer;
+    
+    if (ds_grid_get(map_data, xx, yy) == cell_types.land and ds_grid_get(map_data, xx-2, yy) == cell_types.water)
+    {
+        spawnx = (xx-2+.5)*cell_size;
+        spawny = (yy+.5)*cell_size
+        break;
+    }
+    ticker += 1;
+}
+
 
 instance_create(spawnx, spawny, obj_camera);
 instance_create(0, 0, obj_water_renderer);

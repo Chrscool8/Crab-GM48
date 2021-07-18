@@ -3,10 +3,10 @@
   <spriteName>spr_player_new_neutral</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-99999</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>spr_player_new_mask</maskName>
+  <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -25,15 +25,56 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hsp = 0;
-vsp = 0;
-dir = 0;
-player_speed = 3;
+            <string>image_speed = 10/30;
 
-sprite_index = spr_player_new_neutral;
-in_water = false;
-
-alarm[0] = room_speed*2;
+alarm[0] = room_speed*5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alert("Thank you for playing.", room_speed * 10);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alert("Press R to try an alternate universe, or Enter to continue exploring.", room_speed * 4);
+alarm[2] = room_speed * 1;
 </string>
           </argument>
         </arguments>
@@ -56,11 +97,8 @@ alarm[0] = room_speed*2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!settings[? "tip_zoom"])
-{
-    settings[? "tip_zoom"] = true;
-    alert("You can press CTRL or SHIFT to zoom the view!", room_speed*5);
-}
+            <string>alert("At last, your son is returned from the murky depths.", room_speed * 4);
+alarm[1] = room_speed * 6;
 </string>
           </argument>
         </arguments>
@@ -83,91 +121,19 @@ alarm[0] = room_speed*2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>in_water = !place_free(x, y);
-var modi = (1-(in_water*.75));
-
-hsp = (key_right - key_left) * player_speed * modi;
-vsp = (key_down - key_up)    * player_speed * modi;
-
-if (hsp != 0 and vsp != 0)
+            <string>if (instance_exists(obj_altar))
 {
-    hsp = sign(hsp)*(player_speed * modi / sqrt(2));
-    vsp = sign(vsp)*(player_speed * modi / sqrt(2));
-}
-
-x += hsp;
-y += vsp;
-
-if (hsp != 0 or vsp != 0)
-{
-    image_speed = .25;
-}
-else
-{
-    image_speed = 0;
-    image_index = 0;
-}
-
-if (vsp &lt; 0)
-{
-    if (hsp &lt; 0)
-    {
-        sprite_index = spr_player_new_upleft;
-        dir = 90+45;
-    }
-    else if (hsp == 0)
-    {
-        sprite_index = spr_player_new_up;
-        dir = 90;
-    }
-    else if (hsp &gt; 0)
-    {
-        sprite_index = spr_player_new_upright
-        dir = 90-45;
-    }
-}
-else if (vsp &gt; 0)
-{
-    if (hsp &lt; 0)
-    {
-        sprite_index = spr_player_new_downleft;
-        dir = 270-45;
-    }
-    else if (hsp == 0)
-    {
-        sprite_index = spr_player_new_down;
-        dir = 270;
-    }
-    else if (hsp &gt; 0)
-    {
-        sprite_index = spr_player_new_downright
-        dir = 270+45;
-    }
-}
-else
-{
-    if (hsp &gt; 0)
-    {
-        sprite_index = spr_player_new_right;
-        dir = 0;
-    }
-    else
-    if (hsp &lt; 0)
-    {
-        sprite_index = spr_player_new_left;
-        dir = 180;
-    }
+    x = lerp(x, obj_altar.x,    .01);
+    y = lerp(y, obj_altar.y+20, .01);
 }
 
 depth = -y;
-
-wrap();
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="9" enumb="82">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -184,20 +150,13 @@ wrap();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (not in_water)
-{
-    draw_self();
-}
-else
-{
-    draw_sprite_part(sprite_index, image_index, 0, 0, 32, 16, x-16, y-16);
-}
+            <string>game_restart();
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="18">
+    <event eventtype="9" enumb="13">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -214,32 +173,8 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="10" enumb="32">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>var h = instance_create(x, y, obj_boat);
-h.dir = dir;
-instance_destroy();
+            <string>instance_destroy()
+instance_create(x, y, obj_player);
 </string>
           </argument>
         </arguments>
