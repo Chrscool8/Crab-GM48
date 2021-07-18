@@ -37,7 +37,7 @@ ds_map_add(settings, "surface_size", 1);
 globalvar key_left, key_right, key_up, key_down;
 
 var a = audio_play_sound(choose(snd_crab_chase, snd_trapped_at_ocean), 1, true);
-audio_sound_gain(a, 0, 1);
+audio_sound_gain(a, .2, 1);
 
 alarm[0] = room_speed*4;
 performance = ds_list_create();
