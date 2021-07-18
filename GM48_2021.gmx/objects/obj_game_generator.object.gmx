@@ -240,6 +240,9 @@ for(var i = 0; i &lt; map_width; i++)
     }
 }
 
+surf = -1;
+my_sprite = -1;
+
 instance_create(0, 0, obj_globals);
 
 //instance_destroy();
@@ -274,48 +277,86 @@ instance_create(20, 20, obj_boat);
 else
     map_draw_y = lerp(map_draw_y, view_hport*1.5, .5);
 
+ var cel_size = 16;
 if (map_draw_y &lt; view_hport*1.3)
 {
     draw_sprite_ext(spr_map, 0, view_wport/2, map_draw_y, 4, 4, 0, c_white, 1);
-    var cel_size = 16;
-      
     
+   
     
-    for(var i = 0; i &lt; map_width; i++)
+    if (my_sprite == -1)
     {
-        for(var j = 0; j &lt; map_height; j++)
+        if not surface_exists(surf)
         {
-            var type = ds_grid_get(map_data, i, j);
-            if (type == 0)
+            surf = surface_create(map_width*cel_size, map_height*cel_size);
+        }
+        
+        surface_set_target(surf);   
+        draw_clear_alpha(c_white, 0);
+    
+        for(var i = 0; i &lt; map_width; i++)
+        {
+            for(var j = 0; j &lt; map_height; j++)
             {
-                draw_set_color(make_color_rgb(255,210,162));
+                var type = ds_grid_get(map_data, i, j);
+                if (type == 0)
+                {
+                    draw_set_color(make_color_rgb(255,210,162));
+                }
+                else if (type == 1)
+                {
+                    draw_set_color(make_color_rgb(0,177,230));
+                }
+                else if (type == 2)
+                {
+                    draw_set_color(c_green);
+                }
+                else
+                    draw_set_color(c_black);
+                
+                draw_rectangle(i*cel_size-cel_size/2, j*cel_size-cel_size/2, i*cel_size+cel_size/2, j*cel_size+cel_size/2 , false);
             }
-            else if (type == 1)
-            {
-                draw_set_color(make_color_rgb(0,177,230));
-            }
-            else if (type == 2)
-            {
-                draw_set_color(c_green);
-            }
-            else
-                draw_set_color(c_black);
-            
-            draw_rectangle(view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + i*cel_size+cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size+cel_size/2 - (map_height*cel_size/2), false);
+        }
+        draw_set_color(c_black);
+        draw_set_alpha(.3*keyboard_check(vk_delete));
+        for(var i = 0; i &lt;= map_width; i++)
+        {
+            draw_line(+ i*cel_size-cel_size/2 - (map_width*cel_size/2),  + 0*cel_size-cel_size/2 - (map_height*cel_size/2), + i*cel_size-cel_size/2 - (map_width*cel_size/2),  + map_height*cel_size-cel_size/2 - (map_height*cel_size/2));
+        }
+        
+        for(var j = 0; j &lt;= map_height; j++)
+        {
+            draw_line( + 0*cel_size-cel_size/2 - (map_width*cel_size/2),  + j*cel_size-cel_size/2 - (map_height*cel_size/2),  map_height*cel_size-cel_size/2 - (map_width*cel_size/2),  + j*cel_size-cel_size/2 - (map_height*cel_size/2));
+        }
+        draw_set_alpha(1);
+                
+        
+        surface_reset_target();
+        
+        if (surface_exists(surf))
+        {
+            my_sprite = sprite_create_from_surface(surf, 0, 0, surface_get_width(surf), surface_get_height(surf), false, false, 0, 0);
+            surface_free(surf);
         }
     }
-    draw_set_color(c_black);
-    draw_set_alpha(.3*keyboard_check(vk_delete));
-    for(var i = 0; i &lt;= map_width; i++)
-    {
-        draw_line(view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + 0*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + map_height*cel_size-cel_size/2 - (map_height*cel_size/2));
-    }
+}
+draw_set_color(c_white);
+
+if (my_sprite != -1)
+{
+    var w = cel_size*map_width;
+    var h = cel_size*map_height;
     
-    for(var j = 0; j &lt;= map_height; j++)
-    {
-        draw_line(view_wport/2 + 0*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + map_height*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2));
-    }
-    draw_set_alpha(1);
+    var x1 = view_wport/2-w/2;
+    var y1 = map_draw_y-h/2;
+    var x2 = view_wport/2+w/2.1;
+    var y2 = map_draw_y-h/2;
+    var x3 = view_wport/2+w/2.2;
+    var y3 = map_draw_y+h/2.2;
+    var x4 = view_wport/2-w/1.75;
+    var y4 = map_draw_y+h/2.2;
+        
+    draw_sprite_pos(my_sprite, 0, x1, y1, x2, y2, x3, y3, x4, y4, .6);    
     
     if (ds_list_find_index(global.collected_letters, spr_compass)!=-1)
     {
@@ -323,14 +364,17 @@ if (map_draw_y &lt; view_hport*1.3)
         {
             var i = obj_camera.x / (cell_size);
             var j = obj_camera.y / (cell_size);
-            draw_sprite(spr_cross, 0, view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2));
+            
+            var x_across_1 = lerp(x1, x2, (obj_camera.x / (map_width * cell_size)));
+            var x_across_2 = lerp(x4, x3, (obj_camera.x / (map_width * cell_size)));
+//            var y_across_1 = lerp(x_across_1, x_across_2, (obj_camera.y / (map_height * cell_size)));
+            
+            draw_sprite(spr_cross, 0, i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2));
         }
-        
-        draw_sprite_ext(spr_compass_icon, 0, view_wport/2 + 0*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + map_height*cel_size-cel_size/2 - (map_height*cel_size/2), 4, 4, 0, c_white, 1);
+                
+        draw_sprite_ext(spr_compass_icon, 0, 0*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + map_height*cel_size-cel_size/2 - (map_height*cel_size/2), 4, 4, 0, c_white, 1);
     }
 }
-draw_set_color(c_white);
-
 </string>
           </argument>
         </arguments>
