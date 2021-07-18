@@ -79,6 +79,7 @@
     <sprite>sprites\spr_sail</sprite>
     <sprite>sprites\spr_bino</sprite>
     <sprite>sprites\spr_gull</sprite>
+    <sprite>sprites\spr_map_collect</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>

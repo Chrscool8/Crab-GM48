@@ -31,6 +31,7 @@ dir = 0;
 player_speed = 3;
 
 sprite_index = spr_player_new_neutral;
+in_water = false;
 </string>
           </argument>
         </arguments>
@@ -53,64 +54,20 @@ sprite_index = spr_player_new_neutral;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hsp = (key_right - key_left) * player_speed;
-vsp = (key_down - key_up)    * player_speed;
+            <string>in_water = !place_free(x, y);
+var modi = (1-(in_water*.75));
+
+hsp = (key_right - key_left) * player_speed * modi;
+vsp = (key_down - key_up)    * player_speed * modi;
 
 if (hsp != 0 and vsp != 0)
 {
-    hsp = sign(hsp)*(player_speed / sqrt(2));
-    vsp = sign(vsp)*(player_speed / sqrt(2));
+    hsp = sign(hsp)*(player_speed * modi / sqrt(2));
+    vsp = sign(vsp)*(player_speed * modi / sqrt(2));
 }
 
-if (hsp != 0)
-{
-    if (place_free(x + hsp, y))
-    {
-        x += hsp;
-    }
-    else
-    {
-        /*if (place_free(x + hsp, y + player_speed*1.5))
-        {
-            y += player_speed*1.5;
-            x += hsp;
-        }
-        else
-        if (place_free(x + hsp, y - player_speed*1.5))
-        {
-            y -= player_speed*1.5;
-            x += hsp;
-        }
-        else*/    
-        for(var i = 0; i &lt;= abs(hsp); i++)
-        {
-            if (!place_free(x + sign(hsp)*i, y))
-            {
-                x += sign(hsp)*(i-1);
-                break;
-            }
-        }
-    }
-}
-
-if (vsp != 0)
-{
-    if (place_free(x, y + vsp))
-    {
-        y += vsp;
-    }
-    else
-    {
-        for(var i = 0; i &lt;= abs(vsp); i++)
-        {
-            if (!place_free(x, y + sign(vsp)*i))
-            {
-                y += sign(vsp)*(i-1);
-                break;
-            }
-        }
-    }
-}
+x += hsp;
+y += vsp;
 
 if (hsp != 0 or vsp != 0)
 {
@@ -196,7 +153,14 @@ depth = -y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>if (not in_water)
+{
+    draw_self();
+}
+else
+{
+    draw_sprite_part(sprite_index, image_index, 0, 0, 32, 16, x-16, y-16);
+}
 </string>
           </argument>
         </arguments>

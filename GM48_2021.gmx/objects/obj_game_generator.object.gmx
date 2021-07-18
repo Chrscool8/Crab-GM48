@@ -49,7 +49,7 @@ enum cell_types
 ds_grid_set_region(map_data, 0, 0, map_width, map_height, 1);
 
 var interests = ds_list_create();
-ds_list_add(interests, 0, 1, 2, 3, 4, 5, 6);
+ds_list_add(interests, 0, 1, 2, 3, 4, 5, 6, 7);
 ds_list_shuffle(interests);
 var num_islands = ds_list_size(interests);
 
@@ -99,6 +99,11 @@ for(var i = 0; i &lt; num_islands; i++)
                 case 6: 
                     var h = instance_create((xx+.5) * cell_size, (yy+.5) * cell_size, obj_pedestal);
                     h.letter = spr_bino;
+                    h.upgrade_platform = true;
+                break;
+                case 7: 
+                    var h = instance_create((xx+.5) * cell_size, (yy+.5) * cell_size, obj_pedestal);
+                    h.letter = spr_map_collect;
                     h.upgrade_platform = true;
                 break;
             }             
@@ -291,68 +296,70 @@ instance_create(spawnx, spawny, obj_boat);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check(ord("M")))
-    map_draw_y = lerp(map_draw_y, view_hport*.5, .5);
-else
-    map_draw_y = lerp(map_draw_y, view_hport*1.5, .5);
-
-if (map_draw_y &lt; view_hport*1.3)
+            <string>if (ds_list_find_index(global.collected_letters, spr_map_collect) != -1)
 {
-    draw_sprite_ext(spr_map, 0, view_wport/2, map_draw_y, 4, 4, 0, c_white, 1);
-    var cel_size = 12;
-      
-    for(var i = 2; i &lt; map_width-2; i++)
+    if (keyboard_check(ord("M")))
+        map_draw_y = lerp(map_draw_y, view_hport*.5, .5);
+    else
+        map_draw_y = lerp(map_draw_y, view_hport*1.5, .5);
+    
+    if (map_draw_y &lt; view_hport*1.3)
     {
-        for(var j = 2; j &lt; map_height-2; j++)
+        draw_sprite_ext(spr_map, 0, view_wport/2, map_draw_y, 4, 4, 0, c_white, 1);
+        var cel_size = 12;
+          
+        for(var i = 2; i &lt; map_width-2; i++)
         {
-            var type = ds_grid_get(map_data, i, j);
-            if (type == 0)
+            for(var j = 2; j &lt; map_height-2; j++)
             {
-                draw_set_color(make_color_rgb(255,210,162));
+                var type = ds_grid_get(map_data, i, j);
+                if (type == 0)
+                {
+                    draw_set_color(make_color_rgb(255,210,162));
+                }
+                else if (type == 1)
+                {
+                    draw_set_color(make_color_rgb(0,177,230));
+                }
+                else if (type == 2)
+                {
+                    draw_set_color(c_green);
+                }
+                else
+                {
+                    draw_set_color(c_black);
+                }
+                
+                draw_rectangle(view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + i*cel_size+cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size+cel_size/2 - (map_height*cel_size/2), false);
             }
-            else if (type == 1)
-            {
-                draw_set_color(make_color_rgb(0,177,230));
-            }
-            else if (type == 2)
-            {
-                draw_set_color(c_green);
-            }
-            else
-            {
-                draw_set_color(c_black);
-            }
-            
-            draw_rectangle(view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + i*cel_size+cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size+cel_size/2 - (map_height*cel_size/2), false);
         }
-    }
-    draw_set_color(c_black);
-    draw_set_alpha(.3*keyboard_check(vk_delete));
-    for(var i = 0; i &lt;= map_width; i++)
-    {
-        draw_line(view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + 0*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + map_height*cel_size-cel_size/2 - (map_height*cel_size/2));
-    }
-    
-    for(var j = 0; j &lt;= map_height; j++)
-    {
-        draw_line(view_wport/2 + 0*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + map_height*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2));
-    }
-    draw_set_alpha(1);
-    
-    if (ds_list_find_index(global.collected_letters, spr_compass)!=-1)
-    {
-        if (instance_exists(obj_camera))
+        draw_set_color(c_black);
+        draw_set_alpha(.3*keyboard_check(vk_delete));
+        for(var i = 0; i &lt;= map_width; i++)
         {
-            var i = obj_camera.x / (cell_size);
-            var j = obj_camera.y / (cell_size);
-            draw_sprite(spr_cross, 0, view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2));
+            draw_line(view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + 0*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + map_height*cel_size-cel_size/2 - (map_height*cel_size/2));
         }
         
-        draw_sprite_ext(spr_compass_icon, 0, view_wport/2 + 0*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + map_height*cel_size-cel_size/2 - (map_height*cel_size/2), 4, 4, 0, c_white, 1);
+        for(var j = 0; j &lt;= map_height; j++)
+        {
+            draw_line(view_wport/2 + 0*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2), view_wport/2 + map_height*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2));
+        }
+        draw_set_alpha(1);
+        
+        if (ds_list_find_index(global.collected_letters, spr_compass)!=-1)
+        {
+            if (instance_exists(obj_camera))
+            {
+                var i = obj_camera.x / (cell_size);
+                var j = obj_camera.y / (cell_size);
+                draw_sprite(spr_cross, 0, view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2));
+            }
+            
+            draw_sprite_ext(spr_compass_icon, 0, view_wport/2 + 0*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + map_height*cel_size-cel_size/2 - (map_height*cel_size/2), 4, 4, 0, c_white, 1);
+        }
     }
+    draw_set_color(c_white);
 }
-draw_set_color(c_white);
-
 </string>
           </argument>
         </arguments>
