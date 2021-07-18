@@ -70,6 +70,18 @@ if (hsp != 0)
     }
     else
     {
+        /*if (place_free(x + hsp, y + player_speed*1.5))
+        {
+            y += player_speed*1.5;
+            x += hsp;
+        }
+        else
+        if (place_free(x + hsp, y - player_speed*1.5))
+        {
+            y -= player_speed*1.5;
+            x += hsp;
+        }
+        else*/    
         for(var i = 0; i &lt;= abs(hsp); i++)
         {
             if (!place_free(x + sign(hsp)*i, y))
