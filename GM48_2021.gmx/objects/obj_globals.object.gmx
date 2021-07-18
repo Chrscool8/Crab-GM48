@@ -36,9 +36,6 @@ ds_map_add(settings, "surface_size", 1);
 
 globalvar key_left, key_right, key_up, key_down;
 
-var a = audio_play_sound(choose(snd_crab_chase, snd_trapped_at_ocean), 1, true);
-audio_sound_gain(a, .2, 1);
-
 alarm[0] = room_speed*4;
 performance = ds_list_create();
 
@@ -47,6 +44,18 @@ warned_performance = false;
 draw_set_font(font0);
 
 global.collected_letters = ds_list_create();
+
+settings[? "music_on"] = 1;
+settings[? "sound_on"] = 1;
+
+settings[? "last_playing_track"] = -1;
+
+global.emitter_music = audio_emitter_create();
+global.emitter_sfx = audio_emitter_create();
+
+var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure), true);
+audio_sound_gain(a, .5, 1);
+
 </string>
           </argument>
         </arguments>
@@ -171,6 +180,60 @@ if (keyboard_check_pressed(ord("3")))
     
     alert("Surface Size Mult: "+string(settings[? "surface_size"])+"x, default: 1");
 }
+
+if (keyboard_check_pressed(ord("4")))
+{
+    switch (settings[? "music_on"])
+    {
+        case 0: 
+            settings[? "music_on"] = 1; 
+        break;
+        case .25: 
+            settings[? "music_on"] = 0; 
+        break;
+        case .5: 
+            settings[? "music_on"] = .25; 
+        break;
+        case .75: 
+            settings[? "music_on"] = .5; 
+        break;
+        case 1: 
+            settings[? "music_on"] = .75; 
+        break;
+        default:         
+            settings[? "music_on"] = 1; 
+    }
+    
+    audio_emitter_gain(global.emitter_music, sqr(settings[? "music_on"]));
+    alert("Music Volume: "+string(settings[? "music_on"])+", default: 1");
+}
+
+if (keyboard_check_pressed(ord("5")))
+{
+    switch (settings[? "sound_on"])
+    {
+        case 0: 
+            settings[? "sound_on"] = 1; 
+        break;
+        case .25: 
+            settings[? "sound_on"] = 0; 
+        break;
+        case .5: 
+            settings[? "sound_on"] = .25; 
+        break;
+        case .75: 
+            settings[? "sound_on"] = .5; 
+        break;
+        case 1: 
+            settings[? "sound_on"] = .75; 
+        break;
+        default:         
+            settings[? "sound_on"] = 1; 
+    }
+    
+    audio_emitter_gain(global.emitter_sfx, sqr(settings[? "sound_on"]));
+    alert("Sound Volume: "+string(settings[? "sound_on"])+", default: 1");
+}
 </string>
           </argument>
         </arguments>
@@ -194,6 +257,30 @@ if (keyboard_check_pressed(ord("3")))
           <argument>
             <kind>1</kind>
             <string>game_restart();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="77">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_ocean_adventure), true);
+audio_sound_gain(a, .5, 1);
 </string>
           </argument>
         </arguments>
