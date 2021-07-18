@@ -22,6 +22,18 @@
       <sprite>sprites\spr_player_up</sprite>
       <sprite>sprites\spr_player_left</sprite>
     </sprites>
+    <sprites name="new player">
+      <sprite>sprites\spr_player_new_mask</sprite>
+      <sprite>sprites\spr_player_new_neutral</sprite>
+      <sprite>sprites\spr_player_new_up</sprite>
+      <sprite>sprites\spr_player_new_down</sprite>
+      <sprite>sprites\spr_player_new_left</sprite>
+      <sprite>sprites\spr_player_new_right</sprite>
+      <sprite>sprites\spr_player_new_downleft</sprite>
+      <sprite>sprites\spr_player_new_downright</sprite>
+      <sprite>sprites\spr_player_new_upleft</sprite>
+      <sprite>sprites\spr_player_new_upright</sprite>
+    </sprites>
     <sprite>sprites\sprite6</sprite>
     <sprite>sprites\sprite8</sprite>
     <sprite>sprites\sprite9</sprite>
