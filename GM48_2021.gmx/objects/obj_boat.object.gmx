@@ -99,7 +99,15 @@ x += lengthdir_x(spd, dir);
 y += lengthdir_y(spd, dir);
 
 if (not instance_position(x, y, par_water))
+{
     spd *= .91;
+    
+    if (!settings[? "tip_beach"])
+    {
+        settings[? "tip_beach"] = true;
+        alert("You can press SPACE to get in or out of your boat!", room_speed*5);
+    }
+}
         
 ticker += 1;
 ticker = ticker mod 2;

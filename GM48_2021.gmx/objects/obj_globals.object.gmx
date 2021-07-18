@@ -51,6 +51,8 @@ settings[? "sound_on"] = 1;
 settings[? "last_playing_track"] = -1;
 
 settings[? "tip_gulls"] = false;
+settings[? "tip_zoom"] = false;
+settings[? "tip_beach"] = false;
 //settings[? "tip_movement"] = false;
 
 global.emitter_music = audio_emitter_create();
@@ -61,7 +63,7 @@ audio_sound_gain(a, .5, 1);
 
 
 alarm[1] = room_speed * 10;
-alarm[2] = room_speed * 20;
+//alarm[2] = room_speed * 20;
 alarm[3] = room_speed * .5;
 
 
@@ -94,29 +96,6 @@ alarm[3] = room_speed * .5;
           <argument>
             <kind>1</kind>
             <string>alert("You can use the arrow keys or WASD to control your character!", room_speed*5);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>alert("You can press CTRL or SHIFT to zoom the view!", room_speed*5);
 </string>
           </argument>
         </arguments>
@@ -161,7 +140,7 @@ if (instance_exists(obj_boat))
 if (!settings[? "tip_gulls"])
 {
     settings[? "tip_gulls"] = true;
-    alert("Flying gulls may give you a hint where shore is from time to time!", room_speed*4);
+    alert("Flying gulls may give you a hint where land is from time to time!", room_speed*4);
 }
 </string>
           </argument>
