@@ -7,6 +7,10 @@
   <sounds name="sound">
     <sound>sound\snd_crab_chase</sound>
     <sound>sound\snd_trapped_at_ocean</sound>
+    <sound>sound\snd_activate_stone</sound>
+    <sound>sound\snd_womwomwom</sound>
+    <sound>sound\snd_puff</sound>
+    <sound>sound\snd_puff2</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>

@@ -30,6 +30,7 @@ spd = 0;
 surf = -1;
 sep = 2;
 ticker = 0;
+max_spd = 5;
 </string>
           </argument>
         </arguments>
@@ -53,18 +54,18 @@ ticker = 0;
           <argument>
             <kind>1</kind>
             <string>spd += (key_up-key_down)/20;
-spd = clamp(spd, -5, 5);
+spd = clamp(spd, -max_spd, max_spd);
 
 dir -= (key_right-key_left);
 
 x += lengthdir_x(spd, dir);
 y += lengthdir_y(spd, dir);
 
-if (not instance_position(x, y, obj_water))
+if (not instance_position(x, y, par_water))
     spd *= .95;
     
-if (keyboard_check(vk_enter))
-    spd = 4;
+//if (keyboard_check(vk_enter))
+//    spd = 4;
     
 ticker += 1;
 ticker = ticker mod 2;
