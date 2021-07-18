@@ -45,6 +45,8 @@ performance = ds_list_create();
 warned_performance = false;
 
 draw_set_font(font0);
+
+global.collected_letters = ds_list_create();
 </string>
           </argument>
         </arguments>

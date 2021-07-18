@@ -34,6 +34,8 @@ depth = -y;
 activated = false;
 spin = 1;
 collected = false;
+
+was_letter = -1;
 </string>
           </argument>
         </arguments>
@@ -57,6 +59,77 @@ collected = false;
           <argument>
             <kind>1</kind>
             <string>surface_free(surf);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ds_list_add(global.collected_letters, was_letter);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>for (var j = 0; j &lt; ds_list_size(global.collected_letters); j++)
+{
+    var sep = 1;
+    if (not surface_exists(surf))
+    {
+        surf = surface_create(128, 128);
+    }
+    
+    surface_set_target(surf);
+    draw_clear_alpha(c_white, 0);
+    var float = sin((current_time/700)-j*.5)*30;
+    
+    var iterations = 1;
+    if (not activated)
+        draw_sprite_ext(ds_list_find_value(global.collected_letters, j), 1, 64, 64, 1, 1, float, c_black, .8);
+        
+    var iterations = 1;
+    for(var i = 0; i &lt; sprite_get_number(letter)*iterations; i++)
+    {
+        draw_sprite_ext(ds_list_find_value(global.collected_letters, j), i/iterations, 64, 64-sep*i/iterations, 1, 1, float, c_white, 1);
+    }
+    surface_reset_target();
+        
+    if (surface_exists(surf))  
+        draw_surface_ext(surf, 72 * j-270, view_hport - 290, 5, 5*.8, 0, c_white, 1);    
+}
 </string>
           </argument>
         </arguments>
@@ -132,11 +205,37 @@ if(letter != -1)
     }
     else if (activated and spin &gt;= 45)
     {
+        was_letter = letter;
         letter = -1;
+        alarm[0] = 45;
         audio_play_sound(snd_puff2, 1, false);
+        audio_play_sound(snd_collect, 1, false);
         effect_create_above(ef_firework, x, y-40, 0, c_yellow);
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="107">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ds_list_add(global.collected_letters, spr_letter_C);
 </string>
           </argument>
         </arguments>
