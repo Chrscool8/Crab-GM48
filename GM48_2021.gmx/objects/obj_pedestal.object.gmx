@@ -100,7 +100,7 @@ switch (was_letter)
     case spr_letter_B: 
         alert("You found the B!", room_speed*3);
     break;
-    default: ;
+    default: break;
 }
  
 </string>

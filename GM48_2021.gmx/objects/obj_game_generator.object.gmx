@@ -213,19 +213,27 @@ for(var i = 0; i &lt; map_width; i++)
         if (type == cell_types.land)
         {
             repeat(random(10))
-            {
-                var xxx = random_range(i * cell_size, (i+1) * cell_size);
-                var yyy = random_range(j * cell_size, (j+1) * cell_size);
-                if (instance_exists(obj_pedestal))
+            {   
+                repeat(30)
                 {
-                    var obj = instance_nearest(xxx, yyy, obj_pedestal);
-                    if (point_distance(xxx, yyy, obj.x, obj.y) &gt; 50)
+                    var xxx = random_range(i * cell_size, (i+1) * cell_size);
+                    var yyy = random_range(j * cell_size, (j+1) * cell_size);
+                    if (instance_exists(obj_pedestal))
+                    {
+                        var obj = instance_nearest(xxx, yyy, obj_pedestal);
+                        if (point_distance(xxx, yyy, obj.x, obj.y) &gt; 50)
+                        {
+                            instance_create(xxx, yyy, obj_tree_generator);
+                            break;
+                        }
+                        
+                    }
+                    else
                     {
                         instance_create(xxx, yyy, obj_tree_generator);
+                        break;
                     }
                 }
-                else
-                    instance_create(xxx, yyy, obj_tree_generator);
             }
             
             repeat(random(20))
