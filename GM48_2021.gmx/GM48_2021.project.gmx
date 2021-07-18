@@ -73,6 +73,7 @@
     <sprite>sprites\spr_fish0</sprite>
     <sprite>sprites\spr_fish1</sprite>
     <sprite>sprites\spr_splash</sprite>
+    <sprite>sprites\spr_sail</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
