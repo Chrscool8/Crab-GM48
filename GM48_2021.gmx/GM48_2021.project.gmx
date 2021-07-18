@@ -93,6 +93,8 @@
     <script>scripts\draw_text_outline.gml</script>
     <script>scripts\music_player_play.gml</script>
     <script>scripts\sfx_player_play.gml</script>
+    <script>scripts\send_gull.gml</script>
+    <script>scripts\has_item.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\just_blur.shader</shader>
