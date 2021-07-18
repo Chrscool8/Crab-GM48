@@ -71,6 +71,7 @@
     <sprite>sprites\spr_compass_icon</sprite>
     <sprite>sprites\spr_compass</sprite>
     <sprite>sprites\spr_fish0</sprite>
+    <sprite>sprites\spr_fish1</sprite>
     <sprite>sprites\spr_splash</sprite>
   </sprites>
   <backgrounds name="background">

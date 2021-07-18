@@ -36,6 +36,12 @@ if (random(100)&lt;1)
     
 depth = -ystart;
 image_speed = .5;
+
+if (random(10)&lt;1)
+{
+    sprite_index = spr_fish1;
+    image_blend = make_colour_hsv(random(360), 200, 200);
+}
 </string>
           </argument>
         </arguments>
@@ -101,9 +107,9 @@ x += hsp;
 surface_set_target(surf);
 draw_clear_alpha(c_white, 0);
 if(idiot)
-    draw_sprite_ext(sprite_index, image_index, 60/2, max(0, y-ystart)+30, sign(hsp), 1, 90 * clamp(vsp, -6, 6)/6 * -sign(hsp), c_white, image_alpha);
+    draw_sprite_ext(sprite_index, image_index, 60/2, max(0, y-ystart)+30, sign(hsp), 1, 90 * clamp(vsp, -6, 6)/6 * -sign(hsp), image_blend, image_alpha);
 else
-    draw_sprite_ext(sprite_index, image_index, 60/2, max(0, y-ystart)+30, -sign(hsp), 1, 90 * clamp(vsp, -6, 6)/6 * -sign(hsp), c_white, image_alpha);
+    draw_sprite_ext(sprite_index, image_index, 60/2, max(0, y-ystart)+30, -sign(hsp), 1, 90 * clamp(vsp, -6, 6)/6 * -sign(hsp), image_blend, image_alpha);
     
 if ((y-ystart)&gt;0 and (y-ystart)&lt;30)
     draw_sprite(spr_splash, current_time/1000, 60/2, 60);
