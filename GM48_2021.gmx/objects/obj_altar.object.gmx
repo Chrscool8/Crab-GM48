@@ -26,6 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>depth = -y;
+active = false;
+
+alpha = 0;
+boyy = -60;
+image_speed = 0;
 </string>
           </argument>
         </arguments>
@@ -50,21 +55,67 @@
             <kind>1</kind>
             <string>if (instance_exists(obj_player) and distance_to_object(obj_player)&lt;50)
 {
-    if (has_item(spr_letter_C) and has_item(spr_letter_R) and has_item(spr_letter_A) and has_item(spr_letter_B))
+    if (not active)
     {
-        ds_list_delete(global.collected_letters, ds_list_find_index(global.collected_letters, spr_letter_C));
-        ds_list_delete(global.collected_letters, ds_list_find_index(global.collected_letters, spr_letter_R));
-        ds_list_delete(global.collected_letters, ds_list_find_index(global.collected_letters, spr_letter_A));
-        ds_list_delete(global.collected_letters, ds_list_find_index(global.collected_letters, spr_letter_B));
-    }
-    else
-    {
-        if (!settings[? "tip_altar"])
+        if (has_item(spr_letter_C) and has_item(spr_letter_R) and has_item(spr_letter_A) and has_item(spr_letter_B))
         {
-            settings[? "tip_altar"] = true;
-            alert("It seems that there are holes shaped like four letters. Maybe they can be filled?", room_speed*4);
+            ds_list_delete(global.collected_letters, ds_list_find_index(global.collected_letters, spr_letter_C));
+            ds_list_delete(global.collected_letters, ds_list_find_index(global.collected_letters, spr_letter_R));
+            ds_list_delete(global.collected_letters, ds_list_find_index(global.collected_letters, spr_letter_A));
+            ds_list_delete(global.collected_letters, ds_list_find_index(global.collected_letters, spr_letter_B));
+            alert("The CRAB altar accepts your sacrifice and relinquishes a reward.", 10*room_speed);
+            active = true;
+            with(obj_player)
+            {
+                instance_create(x, y, obj_player_win);
+                instance_destroy();
+            }
+        }
+        else
+        {
+            if (!settings[? "tip_altar"])
+            {
+                //settings[? "tip_altar"] = true;
+                alert("It seems that there are holes shaped like four letters. Maybe they can be filled?", room_speed*4);
+            }
         }
     }
+    
+    settings[? "tip_altar"] = true
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+
+if (active)
+{
+    if (alpha &lt; 1)
+        alpha += .005;
+    if (boyy &lt; 0)
+        boyy = lerp(boyy, 0, .001);
+   
+    draw_sprite_ext(sprite_index, 1, x, y, 1, 1, 0, c_white, alpha); 
+    draw_sprite_ext(spr_baby, image_index, x, y+boyy-50, 1, 1, 0, c_white, alpha);
 }
 </string>
           </argument>

@@ -83,6 +83,7 @@
     <sprite>sprites\spr_map_collect</sprite>
     <sprite>sprites\spr_altar</sprite>
     <sprite>sprites\spr_shade</sprite>
+    <sprite>sprites\spr_baby</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -113,6 +114,7 @@
     <object>objects\obj_globals</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_player</object>
+    <object>objects\obj_player_win</object>
     <object>objects\object1</object>
     <objects name="water">
       <object>objects\par_water</object>

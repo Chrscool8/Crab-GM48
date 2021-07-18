@@ -113,7 +113,7 @@ with(focus)
             x_target = x + lengthdir_x(20*spd*other.zoom, dir);
             y_target = y + lengthdir_y(20*spd*other.zoom, dir);
         }
-        else
+        else if (focus == obj_player)
         {
             x_target = x + lengthdir_x(10*other.zoom, dir);
             y_target = y + lengthdir_y(10*other.zoom, dir);
@@ -132,6 +132,30 @@ view_hview = 480 * zoom; // *clamp(zoom, .5, 2);
 
 view_xview = x - view_wview/2;
 view_yview = y - view_hview/2;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_deactivate_object(obj_tree_test);
+instance_deactivate_object(obj_decoration);
+//instance_deactivate_object(obj_pedestal);
+instance_activate_region(view_xview-200, view_yview-200, view_wview+400, view_hview+400, true);
 </string>
           </argument>
         </arguments>
