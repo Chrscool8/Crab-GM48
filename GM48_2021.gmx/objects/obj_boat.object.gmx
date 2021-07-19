@@ -189,6 +189,7 @@ if (ds_list_find_index(global.collected_letters, spr_sail)!=-1)
 }
 surface_reset_target();
 
+if(surface_exists(surf))
 draw_surface_ext(surf, x-size/2, y-size/2+(size*.1), 1, .8, 0, c_white, 1);
 
 if (ticker == 0 and abs(spd)&gt;.1)

@@ -87,7 +87,7 @@ for(var i = 0; i &lt; image_number*iterations; i++)
     draw_sprite_ext(sprite_index, i/iterations, 128, 128-sep*i/iterations, 1, 1, direction, c_white, 1);
 }
 surface_reset_target();
-
+if(surface_exists(surf))
 draw_surface_ext(surf, x-128, y-128, 1, .8+keyboard_check(vk_space)*.2, 0, c_white, 1);
 direction+=1;
 </string>

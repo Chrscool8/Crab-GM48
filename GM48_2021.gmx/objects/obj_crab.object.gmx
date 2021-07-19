@@ -52,8 +52,8 @@ vsp = 0;
           <argument>
             <kind>1</kind>
             <string>alarm[0] = 15*random(4)+15;
-hsp = choose(-1, 0, 0, 1);
-vsp = choose(-1, 0, 0, 1);
+hsp = choose(-random(1), 0, 0, random(1));
+vsp = choose(-random(1), 0, 0, random(1));
 </string>
           </argument>
         </arguments>
@@ -76,7 +76,7 @@ vsp = choose(-1, 0, 0, 1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_speed = .5 * (hsp!=0 or vsp!=0);
+            <string>image_speed = (abs(hsp)+abs(vsp))*.5;
 
 if (instance_position(x, y, par_water))
 {

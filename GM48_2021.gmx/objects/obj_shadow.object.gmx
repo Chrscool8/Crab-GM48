@@ -130,8 +130,8 @@ with(obj_player_win)
 with(obj_altar)
 {
     var xx1 = (x-view_xview+(wid))/zoom*quality_scale;
-    var yy1 = (y-view_yview+(hei)-1)/zoom*quality_scale;
-    draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale*1.1, image_yscale*-.6/zoom*quality_scale, -20, c_black, 1);   
+    var yy1 = (y-view_yview+(hei)-18)/zoom*quality_scale;
+    draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale*1.1, image_yscale*-.6/zoom*quality_scale, 0, c_black, 1);   
 }
 
 with(obj_fish)
