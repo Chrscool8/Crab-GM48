@@ -10,9 +10,6 @@
     <sound>sound\msc_crab_ocean</sound>
     <sound>sound\msc_lullaby</sound>
     <sound>sound\msc_mystery</sound>
-    <sound>sound\msc_ocean_adventure</sound>
-    <sound>sound\msc_promenade</sound>
-    <sound>sound\msc_sandcastles</sound>
     <sound>sound\msc_trapped_at_ocean</sound>
     <sound>sound\snd_activate_stone</sound>
     <sound>sound\snd_collect</sound>
@@ -21,6 +18,7 @@
     <sound>sound\snd_puff2</sound>
     <sound>sound\snd_seagull</sound>
     <sound>sound\snd_womwomwom</sound>
+    <sound>sound\snd_amb_ocean</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
