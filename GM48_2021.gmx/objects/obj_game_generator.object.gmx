@@ -368,7 +368,7 @@ instance_create(spawnx, spawny, obj_boat);
             <string>if (ds_list_find_index(global.collected_letters, spr_map_collect) != -1)
 {
     if (keyboard_check(ord("M")))
-        map_draw_y = lerp(map_draw_y, view_hport*.5, .5);
+        map_draw_y = lerp(map_draw_y, view_hport*.4, .5);
     else
         map_draw_y = lerp(map_draw_y, view_hport*1.5, .5);
     
@@ -426,7 +426,7 @@ instance_create(spawnx, spawny, obj_boat);
                 draw_sprite(spr_cross, 0, view_wport/2 + i*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + j*cel_size-cel_size/2 - (map_height*cel_size/2));
             }
             
-            draw_sprite_ext(spr_compass_icon, 0, view_wport/2 + 0*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + map_height*cel_size-cel_size/2 - (map_height*cel_size/2), 4, 4, 0, c_white, 1);
+            draw_sprite_ext(spr_compass_icon, 0, view_wport/2 + 2*cel_size-cel_size/2 - (map_width*cel_size/2), map_draw_y + map_height*cel_size-cel_size/2 - (map_height*cel_size/2), 4, 4, 0, c_white, 1);
         }
     }
     draw_set_color(c_white);
