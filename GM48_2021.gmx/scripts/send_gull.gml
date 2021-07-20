@@ -36,7 +36,7 @@ with(obj_camera)
     }
     else if instance_exists(obj_altar)
     {
-        var h = instance_create(x, y, obj_altar);
+        var h = instance_create(x, y, obj_gulls);
         var dir = point_direction(x, y, obj_altar.x, obj_altar.y);
         h.dir = dir;    
     }
