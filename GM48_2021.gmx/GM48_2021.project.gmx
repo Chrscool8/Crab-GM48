@@ -87,6 +87,7 @@
     <sprite>sprites\spr_baby</sprite>
     <sprite>sprites\spr_crab_body</sprite>
     <sprite>sprites\spr_crab_hands</sprite>
+    <sprite>sprites\spr_grass_color</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -108,6 +109,7 @@
     <shader type="GLSLES">shaders\shader_blur_water_small.shader</shader>
     <shader type="GLSLES">shaders\shader_blur_sand.shader</shader>
     <shader type="GLSLES">shaders\shader_blur_sand_small.shader</shader>
+    <shader type="GLSLES">shaders\sh_color_tester.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\font0</font>
