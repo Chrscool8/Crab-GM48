@@ -46,8 +46,8 @@ draw_set_font(font0);
 
 global.collected_letters = ds_list_create();
 
-settings[? "music_on"] = 1;
-settings[? "sound_on"] = 1;
+settings[? "music_on"] = .5;
+settings[? "sound_on"] = .5;
 settings[? "last_playing_track"] = -1;
 
 settings[? "tip_gulls"] = false;
@@ -62,6 +62,9 @@ global.emitter_sfx = audio_emitter_create();
 var a = music_player_play(choose(msc_crab_chase, msc_trapped_at_ocean, msc_lullaby, msc_crab_cave, msc_mystery, msc_crab_ocean), true);
 //audio_sound_gain(a, .5, 1);
 sfx_player_play(snd_amb_ocean, 1, true);
+
+audio_emitter_gain(global.emitter_music, sqr(settings[? "music_on"]));
+audio_emitter_gain(global.emitter_sfx, sqr(settings[? "sound_on"]));
 
 alarm[5] = 1;
 alarm[1] = room_speed * 20;
@@ -90,7 +93,7 @@ alarm[4] = room_speed * 3 * 60;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alert("You can use the arrow keys or WASD to control your character!",   room_speed*15);
+            <string>/*alert("You can use the arrow keys or WASD to control your character!",   room_speed*15);
 alert("  ", room_speed*15);
 alert("but you are determined to explore this place and seek the return of a terrible loss.",     room_speed*15);
 alert("before, but something seems off. The islands are never where you once thought they were", room_speed*15);
