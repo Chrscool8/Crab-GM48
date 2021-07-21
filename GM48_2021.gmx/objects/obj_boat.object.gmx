@@ -78,7 +78,9 @@ alarm[0] = room_speed*3 + random(room_speed*30);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[0] = room_speed*3 + random(room_speed*30);
+            <string>///fish
+
+alarm[0] = room_speed*3 + random(room_speed*30);
 
 var xx = x + lengthdir_x(spd*3, dir);
 var yy = y + lengthdir_y(spd*3, dir);
@@ -234,7 +236,8 @@ if (key_right or not instance_position(x, y, obj_water))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>send_gull();
+</string>
           </argument>
         </arguments>
       </action>

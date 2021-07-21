@@ -88,6 +88,7 @@
     <sprite>sprites\spr_crab_body</sprite>
     <sprite>sprites\spr_crab_hands</sprite>
     <sprite>sprites\spr_grass_color</sprite>
+    <sprite>sprites\spr_title</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -144,11 +145,14 @@
     <object>objects\obj_alert_text</object>
     <object>objects\obj_pedestal</object>
     <object>objects\obj_fish</object>
+    <object>objects\obj_gull</object>
     <object>objects\obj_gulls</object>
     <object>objects\obj_altar</object>
     <object>objects\obj_crab</object>
+    <object>objects\obj_title</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room1</room>
     <room>rooms\room0</room>
   </rooms>
   <help>
