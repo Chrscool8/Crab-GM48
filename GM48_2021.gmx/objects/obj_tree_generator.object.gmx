@@ -156,6 +156,8 @@ my_sprite2 = -1;
 draw_ellipse_colour(x-creation_size, y-creation_size, x+creation_size, y+creation_size, c_white, c_black, false);
 draw_set_blend_mode(bm_normal);*/
 
+exit;
+
 var light_gween = make_color_rgb(125, 146, 100);
 var gween = make_color_rgb(100, 125, 70);
 
@@ -253,6 +255,8 @@ else
 /*draw_set_blend_mode(bm_subtract);
 draw_ellipse_colour(x-creation_size, y-creation_size, x+creation_size, y+creation_size, c_white, c_black, false);
 draw_set_blend_mode(bm_normal);*/
+
+exit;
 
 var surface_size = creation_size*3;
 if (my_sprite2 == -1)

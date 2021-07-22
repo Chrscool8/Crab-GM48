@@ -174,53 +174,58 @@ if (!activated and instance_exists(obj_player) and distance_to_object(obj_player
     sfx_player_play(snd_womwomwom, 1, false);
 }
 
-if(letter != -1)
-{    
-    if(not activated)
-        draw_sprite_ext(sprite_index, 1, x, y, image_xscale, image_yscale, image_angle, image_blend, (sin(current_time/2000)+1)/4+.25);
-    else
-        draw_sprite_ext(sprite_index, 1, x, y, image_xscale, image_yscale, image_angle, image_blend, (sin(current_time/2000)+1)/4+.25+spin/45);  
-        
-    dir += spin;
-
-    surface_set_target(surf);
-    draw_clear_alpha(c_white, 0);
-    var float = sin(current_time/2000)*3.5;
+if (point_in_rectangle(x, y, view_xview, view_yview, view_xview+view_wview, view_yview+view_hview))
+{
+    if(letter != -1)
+    {    
+        if(not activated)
+            draw_sprite_ext(sprite_index, 1, x, y, image_xscale, image_yscale, image_angle, image_blend, (sin(current_time/2000)+1)/4+.25);
+        else
+            draw_sprite_ext(sprite_index, 1, x, y, image_xscale, image_yscale, image_angle, image_blend, (sin(current_time/2000)+1)/4+.25+spin/45);  
+            
+        dir += spin;
     
-    if (not activated)
-        draw_sprite_ext(letter, 1, 64, 64+8-float, 1, 1, dir, c_black, .8);
+        surface_set_target(surf);
+        draw_clear_alpha(c_white, 0);
+        var float = sin(current_time/2000)*3.5;
         
-    var iterations = 1;
-    for(var i = 0; i &lt; sprite_get_number(letter)*iterations; i++)
-    {
-        draw_sprite_ext(letter, i/iterations, 64, 64-sep*i/iterations, 1, 1, dir, c_white, 1);
-    }
-    surface_reset_target();
-  if(surface_exists(surf))
-    draw_surface_ext(surf, x-64, y-64-9+float-spin/3, 1, .8, 0, c_white, 1);
-    
-    if (activated and spin &lt; 45)
-    {
-        spin += .15;    
-        with(obj_tree_test)
+        if (not activated)
+            draw_sprite_ext(letter, 1, 64, 64+8-float, 1, 1, dir, c_black, .8);
+            
+        var iterations = 1;
+        for(var i = 0; i &lt; sprite_get_number(letter)*iterations; i++)
         {
-            if (distance_to_object(other.id) &lt; 50)
+            draw_sprite_ext(letter, i/iterations, 64, 64-sep*i/iterations, 1, 1, dir, c_white, 1);
+        }
+        surface_reset_target();
+        if(surface_exists(surf))
+            draw_surface_ext(surf, x-64, y-64-9+float-spin/3, 1, .8, 0, c_white, 1);
+        
+        if (activated and spin &lt; 45)
+        {
+            spin += .15;    
+            with(obj_tree_test)
             {
-                if (image_alpha &gt; .2)
-                    image_alpha -= .005;
+                if (distance_to_object(other.id) &lt; 50)
+                {
+                    if (image_alpha &gt; .2)
+                        image_alpha -= .005;
+                }
             }
         }
-    }
-    else if (activated and spin &gt;= 45)
-    {
-        was_letter = letter;
-        letter = -1;
-        alarm[0] = 45;
-        sfx_player_play(snd_puff2, 1, false);
-        sfx_player_play(snd_collect, 1, false);
-        effect_create_above(ef_firework, x, y-40, 0, c_yellow);
+        else if (activated and spin &gt;= 45)
+        {
+            was_letter = letter;
+            letter = -1;
+            alarm[0] = 45;
+            sfx_player_play(snd_puff2, 1, false);
+            sfx_player_play(snd_collect, 1, false);
+            effect_create_above(ef_firework, x, y-40, 0, c_yellow);
+        }
     }
 }
+else
+    surface_free(surf);
 </string>
           </argument>
         </arguments>

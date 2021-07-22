@@ -89,6 +89,7 @@
     <sprite>sprites\spr_crab_hands</sprite>
     <sprite>sprites\spr_grass_color</sprite>
     <sprite>sprites\spr_title</sprite>
+    <sprite>sprites\obj_baby_3d</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>

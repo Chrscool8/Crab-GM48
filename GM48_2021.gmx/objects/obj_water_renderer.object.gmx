@@ -80,7 +80,7 @@ if (shaders_are_supported() and shader_is_compiled(shader_blur_sand) and shader_
 {
     if (not surface_exists(surf))
     {
-        surf = surface_create(view_wport*1.5, view_hport*1.5);
+        surf = surface_create(view_wport*1.5*quality_scale, view_hport*1.5*quality_scale);
     }
     
     var wid = view_wport/8;
