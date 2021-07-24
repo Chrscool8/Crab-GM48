@@ -32,6 +32,8 @@ ticker = 0;
 max_spd = 5;
 spd = max_spd;
 alarm[0] = room_speed*3 + random(room_speed*30);
+
+playable = false;
 </string>
           </argument>
         </arguments>

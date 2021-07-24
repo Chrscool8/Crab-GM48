@@ -100,10 +100,10 @@ else if (keyboard_check(vk_shift))
 
 var focus = -1;
 
-if (instance_exists(obj_player))
+if (instance_exists(obj_player) and obj_player.playable)
     focus = obj_player;
 
-if (instance_exists(obj_boat))
+if (instance_exists(obj_boat) and obj_boat.playable)
 {
     focus = obj_boat;
     //zoom_target = 2.1;
