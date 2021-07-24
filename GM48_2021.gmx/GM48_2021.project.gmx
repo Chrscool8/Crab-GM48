@@ -49,6 +49,7 @@
     <sprite>sprites\spr_ripples</sprite>
     <sprite>sprites\spr_rocks</sprite>
     <sprite>sprites\spr_boat</sprite>
+    <sprite>sprites\sprite61</sprite>
     <sprites name="trees">
       <sprite>sprites\spr_trees_0</sprite>
       <sprite>sprites\spr_trees_1</sprite>
@@ -75,8 +76,11 @@
     <sprite>sprites\spr_cross</sprite>
     <sprite>sprites\spr_compass_icon</sprite>
     <sprite>sprites\spr_compass</sprite>
-    <sprite>sprites\spr_fish0</sprite>
-    <sprite>sprites\spr_fish1</sprite>
+    <sprites name="fishes">
+      <sprite>sprites\spr_fish0</sprite>
+      <sprite>sprites\spr_fish1</sprite>
+      <sprite>sprites\spr_fish2</sprite>
+    </sprites>
     <sprite>sprites\spr_splash</sprite>
     <sprite>sprites\spr_sail</sprite>
     <sprite>sprites\spr_bino</sprite>
@@ -140,14 +144,12 @@
     <object>objects\obj_decoration</object>
     <object>objects\obj_boat</object>
     <object>objects\obj_tree_test</object>
-    <object>objects\object15</object>
     <object>objects\obj_wake</object>
     <object>objects\obj_tree_generator</object>
     <object>objects\obj_alert_text</object>
     <object>objects\obj_pedestal</object>
     <object>objects\obj_fish</object>
     <object>objects\obj_gull</object>
-    <object>objects\obj_gulls</object>
     <object>objects\obj_altar</object>
     <object>objects\obj_crab</object>
     <object>objects\obj_title</object>
