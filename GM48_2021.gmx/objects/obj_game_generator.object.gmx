@@ -319,7 +319,8 @@ while(ticker &lt; 100000)
 instance_create(spawnx, spawny, obj_camera);
 instance_create(0, 0, obj_water_renderer);
 instance_create(0, 0, obj_shadow);
-instance_create(spawnx, spawny, obj_boat);
+with(instance_create(spawnx, spawny, obj_boat))
+    playable = true;
 </string>
           </argument>
         </arguments>

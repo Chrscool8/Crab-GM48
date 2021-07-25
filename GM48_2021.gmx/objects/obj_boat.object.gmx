@@ -34,6 +34,8 @@ spd = max_spd;
 alarm[0] = room_speed*3 + random(room_speed*30);
 
 playable = false;
+
+swap_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -111,29 +113,38 @@ if (instance_position(xx, yy, par_water))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (ds_list_find_index(global.collected_letters, spr_sail) == -1)
-    max_spd = 3.5;
+            <string>if (playable)
+{
+    if (ds_list_find_index(global.collected_letters, spr_sail) == -1)
+        max_spd = 3.5;
+    else
+        max_spd = 7.5;
+    
+    spd += (key_up-key_down)/20;
+    spd = clamp(spd, -max_spd/2, max_spd);
+    
+    dir -= (key_right-key_left);
+    
+    x += lengthdir_x(spd, dir);
+    y += lengthdir_y(spd, dir);
+    
+    if (not instance_position(x, y, par_water))
+    {
+        spd *= .91;
+        
+        if (!settings[? "tip_beach"])
+        {
+            settings[? "tip_beach"] = true;
+            alert("You can press SPACE to get in or out of your boat!", room_speed*5);
+        }
+    }
+    
+    if (swap_timer &gt; 0)
+        swap_timer -= 1;
+}
 else
-    max_spd = 7.5;
-
-
-spd += (key_up-key_down)/20;
-spd = clamp(spd, -max_spd/2, max_spd);
-
-dir -= (key_right-key_left);
-
-x += lengthdir_x(spd, dir);
-y += lengthdir_y(spd, dir);
-
-if (not instance_position(x, y, par_water))
 {
     spd *= .91;
-    
-    if (!settings[? "tip_beach"])
-    {
-        settings[? "tip_beach"] = true;
-        alert("You can press SPACE to get in or out of your boat!", room_speed*5);
-    }
 }
         
 ticker += 1;
@@ -162,60 +173,85 @@ wrap();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var size = 256;
-
-if (surf == -1)
+            <string>if (not playable)
 {
-    surf = surface_create(size, size);
-}
-
-surface_set_target(surf);
-draw_clear_alpha(c_white, 0);
-var iterations = 2;
-for(var i = 0; i &lt; image_number*iterations-2; i++)
-{
-    draw_sprite_ext(sprite_index, i/iterations, size/2, size/2-sep*i/iterations, 1, 1, dir, c_white, 1);
-}
-
-//iterations += 1;
-if (ds_list_find_index(global.collected_letters, spr_sail)!=-1)
-{
-    for(var i = image_number*iterations; i &lt; image_number*iterations+32; i++)
+    if (instance_exists(obj_player))
     {
-        var sp = abs(spd)/10;
-        var on = 1-((i-image_number*iterations)/16);
-        if (on &gt; sp)
-            draw_sprite_ext(sprite_index, 7, size/2, size/2-(sep)*i/iterations, 1, 1, dir, c_white, 1);
-        else
-            draw_sprite_ext(sprite_index, 8, size/2, size/2-(sep)*i/iterations, 1, 1, dir, c_white, 1);
+        if (point_distance(x, y, obj_player.x, obj_player.y) &lt; 50*.5)
+        {
+            draw_set_alpha(.1);
+            draw_set_color(c_blue);
+            draw_circle(x, y, 50, false);
+            draw_set_color(c_white);
+            draw_set_alpha(1);
+        }
     }
 }
-surface_reset_target();
 
-if(surface_exists(surf))
-draw_surface_ext(surf, x-size/2, y-size/2+(size*.1), 1, .8, 0, c_white, 1);
-
-if (ticker == 0 and abs(spd)&gt;.1)
+if (point_in_rectangle(x, y, view_xview, view_yview, view_xview+view_wview, view_yview+view_hview))
 {
-    var h = instance_create(x+lengthdir_x(16, dir), y+lengthdir_y(16, dir), obj_wake);
-    h.dir = dir;
+    if (playable)
+        sprite_index = spr_boat;
+    else
+        sprite_index = spr_boat2;
+    
+    var size = 256;
+    
+    if (surf == -1)
+    {
+        surf = surface_create(size, size);
+    }
+    
+    surface_set_target(surf);
+    draw_clear_alpha(c_white, 0);
+    var iterations = 2;
+    for(var i = 0; i &lt; image_number*iterations-2; i++)
+    {
+        draw_sprite_ext(sprite_index, i/iterations, size/2, size/2-sep*i/iterations, 1, 1, dir, c_white, 1);
+    }
+    
+    //iterations += 1;
+    if (ds_list_find_index(global.collected_letters, spr_sail)!=-1)
+    {
+        for(var i = image_number*iterations; i &lt; image_number*iterations+32; i++)
+        {
+            var sp = abs(spd)/10;
+            var on = 1-((i-image_number*iterations)/16);
+            if (on &gt; sp)
+                draw_sprite_ext(sprite_index, 8, size/2, size/2-(sep)*i/iterations, 1, 1, dir, c_white, 1);
+            else
+                draw_sprite_ext(sprite_index, 9, size/2, size/2-(sep)*i/iterations, 1, 1, dir, c_white, 1);
+        }
+    }
+    surface_reset_target();
+    
+    if(surface_exists(surf))
+    draw_surface_ext(surf, x-size/2, y-size/2+(size*.1), 1, .8, 0, c_white, 1);
+    
+    if (ticker == 0 and abs(spd)&gt;.1)
+    {
+        var h = instance_create(x+lengthdir_x(16, dir), y+lengthdir_y(16, dir), obj_wake);
+        h.dir = dir;
+    }
+    //h = instance_create(x, y-24, object13);
+    //h.dir = dir - 90;
+    
+    if (key_left or not instance_position(x, y, obj_water))
+    {
+        var h = instance_create(x+lengthdir_x(16, dir+90), y+lengthdir_y(16, dir+90), obj_wake);
+        h.dir = dir + 90;
+        h.size = .5;
+    }
+    
+    if (key_right or not instance_position(x, y, obj_water))
+    {
+        var h = instance_create(x+lengthdir_x(16, dir-90), y+lengthdir_y(16, dir-90), obj_wake);
+        h.dir = dir - 90;
+        h.size = .5;
+    }
 }
-//h = instance_create(x, y-24, object13);
-//h.dir = dir - 90;
-
-if (key_left or not instance_position(x, y, obj_water))
-{
-    var h = instance_create(x+lengthdir_x(16, dir+90), y+lengthdir_y(16, dir+90), obj_wake);
-    h.dir = dir + 90;
-    h.size = .5;
-}
-
-if (key_right or not instance_position(x, y, obj_water))
-{
-    var h = instance_create(x+lengthdir_x(16, dir-90), y+lengthdir_y(16, dir-90), obj_wake);
-    h.dir = dir - 90;
-    h.size = .5;
-}
+else
+    surface_free(surf);
 </string>
           </argument>
         </arguments>
@@ -288,9 +324,18 @@ if (instance_position(xx, yy, par_water))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var h = instance_create(x, y, obj_player);
-h.dir = dir;
-instance_destroy();
+            <string>if (playable and swap_timer == 0)
+{
+    with(instance_create(x, y, obj_player))
+    {
+        dir = other.dir;
+        playable = true;
+        swap_timer = 3;
+    }
+    
+    playable = false;
+    //instance_destroy();
+}
 </string>
           </argument>
         </arguments>

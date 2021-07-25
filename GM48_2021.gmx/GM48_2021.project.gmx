@@ -49,7 +49,7 @@
     <sprite>sprites\spr_ripples</sprite>
     <sprite>sprites\spr_rocks</sprite>
     <sprite>sprites\spr_boat</sprite>
-    <sprite>sprites\sprite61</sprite>
+    <sprite>sprites\spr_boat2</sprite>
     <sprites name="trees">
       <sprite>sprites\spr_trees_0</sprite>
       <sprite>sprites\spr_trees_1</sprite>
