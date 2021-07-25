@@ -125,9 +125,6 @@ if (instance_position(xx, yy, par_water))
     
     dir -= (key_right-key_left);
     
-    x += lengthdir_x(spd, dir);
-    y += lengthdir_y(spd, dir);
-    
     if (not instance_position(x, y, par_water))
     {
         spd *= .91;
@@ -139,12 +136,18 @@ if (instance_position(xx, yy, par_water))
         }
     }
     
+    x += lengthdir_x(spd, dir);
+    y += lengthdir_y(spd, dir);
+    
     if (swap_timer &gt; 0)
         swap_timer -= 1;
 }
 else
 {
     spd *= .91;
+    
+    x += lengthdir_x(spd, dir);
+    y += lengthdir_y(spd, dir);
 }
         
 ticker += 1;
@@ -173,11 +176,13 @@ wrap();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (not playable)
+            <string>show_debug_message(string(surf))
+
+if (not playable)
 {
     if (instance_exists(obj_player))
     {
-        if (point_distance(x, y, obj_player.x, obj_player.y) &lt; 50*.5)
+        if (point_distance(x, y, obj_player.x, obj_player.y) &lt; 50)
         {
             draw_set_alpha(.1);
             draw_set_color(c_blue);
@@ -197,7 +202,7 @@ if (point_in_rectangle(x, y, view_xview, view_yview, view_xview+view_wview, view
     
     var size = 256;
     
-    if (surf == -1)
+    if (not surface_exists(surf))
     {
         surf = surface_create(size, size);
     }
@@ -226,7 +231,7 @@ if (point_in_rectangle(x, y, view_xview, view_yview, view_xview+view_wview, view
     surface_reset_target();
     
     if(surface_exists(surf))
-    draw_surface_ext(surf, x-size/2, y-size/2+(size*.1), 1, .8, 0, c_white, 1);
+        draw_surface_ext(surf, x-size/2, y-size/2+(size*.1), 1, .8, 0, c_white, 1);
     
     if (ticker == 0 and abs(spd)&gt;.1)
     {
@@ -251,7 +256,10 @@ if (point_in_rectangle(x, y, view_xview, view_yview, view_xview+view_wview, view
     }
 }
 else
-    surface_free(surf);
+{
+    if surface_exists(surf)
+        surface_free(surf);
+}
 </string>
           </argument>
         </arguments>
@@ -305,6 +313,22 @@ if (instance_position(xx, yy, par_water))
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="46">
+      <action>
+        <libid>1</libid>
+        <id>203</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_kill_object</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="10" enumb="32">
