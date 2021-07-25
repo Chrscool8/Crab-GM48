@@ -315,6 +315,9 @@ while(ticker &lt; 100000)
     ticker += 1;
 }
 
+global.shirt_color_r = random(255);
+global.shirt_color_g = random(255);
+global.shirt_color_b = random(255);
 
 instance_create(spawnx, spawny, obj_camera);
 instance_create(0, 0, obj_water_renderer);

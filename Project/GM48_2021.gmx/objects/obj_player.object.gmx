@@ -186,13 +186,33 @@ wrap();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (not in_water)
+            <string>if (shader_is_compiled(sh_color_replace))
+{
+    shader_set(sh_color_replace);
+    
+    var shaderparam = shader_get_uniform(shader_current(), "color_old1");
+    shader_set_uniform_f(shaderparam, 226/255, 0, 0, 10/255);
+    shaderparam = shader_get_uniform(shader_current(), "color_new1");
+    shader_set_uniform_f(shaderparam,  global.shirt_color_r/255, global.shirt_color_g/255, global.shirt_color_b/255);
+    
+    shaderparam = shader_get_uniform(shader_current(), "color_old2");
+    shader_set_uniform_f(shaderparam, 88/255, 0, 0, 10/255);
+    shaderparam = shader_get_uniform(shader_current(), "color_new2");
+    shader_set_uniform_f(shaderparam, global.shirt_color_r/255-.2, global.shirt_color_g/255-.2, global.shirt_color_b/255-.2);
+}
+
+if (not in_water)
 {
     draw_self();
 }
 else
 {
     draw_sprite_part(sprite_index, image_index, 0, 0, 32, 16, x-16, y-16);
+}
+
+if (shader_is_compiled(sh_color_replace))
+{
+    shader_reset();
 }
 </string>
           </argument>

@@ -116,6 +116,7 @@
     <shader type="GLSLES">shaders\shader_blur_sand.shader</shader>
     <shader type="GLSLES">shaders\shader_blur_sand_small.shader</shader>
     <shader type="GLSLES">shaders\sh_color_tester.shader</shader>
+    <shader type="GLSLES">shaders\sh_color_replace.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\font0</font>
