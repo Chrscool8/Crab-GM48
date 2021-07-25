@@ -161,7 +161,7 @@ wrap();
             <kind>1</kind>
             <string>var size = 256;
 
-if (surf == -1)
+if (not surface_exists(surf))
 {
     surf = surface_create(size, size);
 }
