@@ -101,9 +101,6 @@ vsp += .1;
 y += vsp;
 x += hsp;
 
-//instance_destroy();
-//vsp *= -1;
-
 surface_set_target(surf);
 draw_clear_alpha(c_white, 0);
 if(idiot)
@@ -111,14 +108,26 @@ if(idiot)
 else
     draw_sprite_ext(sprite_index, image_index, 60/2, max(0, y-ystart)+30, -sign(hsp), 1, 90 * clamp(vsp, -6, 6)/6 * -sign(hsp), image_blend, image_alpha);
     
-if ((y-ystart)&gt;0 and (y-ystart)&lt;30)
+if ((y-ystart)&gt;0 and (y-ystart)&lt;30 and collision_point(x, y, par_water, true, false))
+{
     draw_sprite(spr_splash, current_time/1000, 60/2, 60);
+}
     
 surface_reset_target();
 
 if surface_exists(surf)
-    draw_surface(surf, x, min(y, ystart));
-    
+    draw_surface(surf, x-30, min(y, ystart)-30);
+
+if (y&gt;ystart and vsp &gt; 0 and not collision_point(x, y, par_water, true, false))
+{
+    with(instance_create(x, y, obj_fish_splat))
+    {
+        image_xscale = sign(other.hsp);
+        depth = other.depth;
+    }
+    instance_destroy();
+}    
+        
 if (vsp &gt; 10)
 {
     vsp *= -1;

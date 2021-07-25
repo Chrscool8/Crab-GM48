@@ -176,7 +176,7 @@ wrap();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>show_debug_message(string(surf))
+            <string>//show_debug_message(string(surf))
 
 if (not playable)
 {
