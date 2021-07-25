@@ -118,12 +118,13 @@ surface_reset_target();
 if surface_exists(surf)
     draw_surface(surf, x-30, min(y, ystart)-30);
 
-if (y&gt;ystart and vsp &gt; 0 and not collision_point(x, y, par_water, true, false))
+if (y&gt;ystart-vsp*1.5 and vsp &gt; 0 and not collision_point(x, y, par_water, true, false))
 {
-    with(instance_create(x, y, obj_fish_splat))
+    with(instance_create(x, ystart, obj_fish_splat))
     {
         image_xscale = sign(other.hsp);
         depth = other.depth;
+        image_blend = other.image_blend;
     }
     instance_destroy();
 }    
