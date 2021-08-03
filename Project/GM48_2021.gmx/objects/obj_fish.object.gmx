@@ -42,6 +42,9 @@ if (random(10)&lt;1)
     sprite_index = spr_fish1;
     image_blend = make_colour_hsv(random(360), 200, 200);
 }
+
+if (random(100)&lt;50)
+    sprite_index = spr_fish3;
 </string>
           </argument>
         </arguments>
@@ -92,9 +95,12 @@ if (random(10)&lt;1)
 
 var skim_amount = max(0, y-ystart);
 
+var width = 82;
+var height = 82;
+
 if (not surface_exists(surf))
 {
-    surf = surface_create(60, 60);
+    surf = surface_create(width, height);
 }
 
 vsp += .1;
@@ -104,19 +110,19 @@ x += hsp;
 surface_set_target(surf);
 draw_clear_alpha(c_white, 0);
 if(idiot)
-    draw_sprite_ext(sprite_index, image_index, 60/2, max(0, y-ystart)+30, sign(hsp), 1, 90 * clamp(vsp, -6, 6)/6 * -sign(hsp), image_blend, image_alpha);
+    draw_sprite_ext(sprite_index, image_index, width/2, max(0, y-ystart)+height/2, sign(hsp), 1, 90 * clamp(vsp, -6, 6)/6 * -sign(hsp), image_blend, image_alpha);
 else
-    draw_sprite_ext(sprite_index, image_index, 60/2, max(0, y-ystart)+30, -sign(hsp), 1, 90 * clamp(vsp, -6, 6)/6 * -sign(hsp), image_blend, image_alpha);
+    draw_sprite_ext(sprite_index, image_index, width/2, max(0, y-ystart)+height/2, -sign(hsp), 1, 90 * clamp(vsp, -6, 6)/6 * -sign(hsp), image_blend, image_alpha);
     
 if ((y-ystart)&gt;0 and (y-ystart)&lt;30 and collision_point(x, y, par_water, true, false))
 {
-    draw_sprite(spr_splash, current_time/1000, 60/2, 60);
+    draw_sprite(spr_splash, current_time/1000, width/2, height);
 }
     
 surface_reset_target();
 
 if surface_exists(surf)
-    draw_surface(surf, x-30, min(y, ystart)-30);
+    draw_surface(surf, x-width/2, min(y, ystart)-height/2);
 
 if (y&gt;ystart-vsp*1.5 and vsp &gt; 0 and not collision_point(x, y, par_water, true, false))
 {

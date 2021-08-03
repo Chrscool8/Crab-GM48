@@ -81,6 +81,7 @@
       <sprite>sprites\spr_fish0_splat</sprite>
       <sprite>sprites\spr_fish1</sprite>
       <sprite>sprites\spr_fish2</sprite>
+      <sprite>sprites\spr_fish3</sprite>
     </sprites>
     <sprite>sprites\spr_splash</sprite>
     <sprite>sprites\spr_sail</sprite>
@@ -92,9 +93,12 @@
     <sprite>sprites\spr_baby</sprite>
     <sprite>sprites\spr_crab_body</sprite>
     <sprite>sprites\spr_crab_hands</sprite>
+    <sprite>sprites\spr_crab_pinchy</sprite>
+    <sprite>sprites\sprite64</sprite>
     <sprite>sprites\spr_grass_color</sprite>
     <sprite>sprites\spr_title</sprite>
     <sprite>sprites\obj_baby_3d</sprite>
+    <sprite>sprites\spr_birdie1</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -156,6 +160,7 @@
     <object>objects\obj_altar</object>
     <object>objects\obj_crab</object>
     <object>objects\obj_title</object>
+    <object>objects\obj_floor_bird</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
