@@ -29,6 +29,8 @@
 alarm[0] = 60;
 hsp = 0;
 vsp = 0;
+
+mad = false;
 </string>
           </argument>
         </arguments>
@@ -84,10 +86,80 @@ if (instance_position(x, y, par_water))
     instance_destroy();
 }
 
-x+=hsp;
-y+=vsp
+if (mad)
+{
+    alarm[0] = -1;
+    if (instance_exists(obj_player) and not collision_line(x, y, obj_player.x, obj_player.y, par_water, true, false))
+    {
+        var dir = point_direction(x, y, obj_player.x, obj_player.y)
+        hsp = lengthdir_x(2, dir);
+        vsp = lengthdir_y(2, dir);
+    }
+    else    
+    {
+        hsp = 0;
+        vsp = 0;
+    }
+}
+
+x += hsp;
+y += vsp;
 
 depth = -y;
+
+if keyboard_check_pressed(ord("M"))
+{
+    mad = not mad;
+    vsp = 0;
+    hsp = 0;   
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///physicality
+
+if (instance_number(obj_crab)&gt;1)
+{
+    instance_deactivate_object(id);
+    
+    var near = instance_nearest(x, y, obj_crab);
+    if (instance_exists(near))
+    {
+        var max_dis = 20;
+        var dis = point_distance(x, y, near.x, near.y);
+        if (dis&lt;max_dis)
+        {
+            var push = 5;
+            var dir = point_direction(near.x, near.y, x, y);
+            var xx = x + lengthdir_x(((push+random(1))/10)*(1-(dis/max_dis)), dir);
+            var yy = y + lengthdir_y(((push+random(1))/10)*(1-(dis/max_dis)), dir);
+            if (not collision_circle(xx, yy, 15, par_water, true, true))
+            {
+                x = xx;
+                y = yy;
+            }
+        }
+    }
+    
+    instance_activate_object(id);
+}
 </string>
           </argument>
         </arguments>
@@ -110,8 +182,35 @@ depth = -y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(spr_crab_body, image_index, x, y);
-draw_sprite(spr_crab_hands, 0, x, y);
+            <string>/*if (mad)
+{   
+    draw_set_alpha(.1);
+    draw_set_colour(c_red);
+    draw_ellipse(x-30, y-10, x+30, y+10, false);
+    draw_set_colour(c_white);
+    draw_set_alpha(1);
+}*/
+
+draw_sprite(spr_crab_body, image_index, x, y);
+
+if (!instance_exists(obj_player))
+{
+    draw_sprite_ext(spr_crab_hands, mad*current_time/100, x, y, 1, 1, 0, c_white, 1);
+    draw_sprite_ext(spr_crab_hands, mad*current_time/100, x, y, -1, 1, 0, c_white, 1);
+}
+else
+{
+    if (obj_player.x &lt; x)
+    {
+        draw_sprite_ext(spr_crab_pinchy, mad*current_time/100, x, y, 1, 1, 0, c_white, 1);
+        draw_sprite_ext(spr_crab_hands, mad*current_time/100, x, y, -1, 1, 0, c_white, 1);
+    }
+    else
+    {
+        draw_sprite_ext(spr_crab_hands, mad*current_time/100, x, y, 1, 1, 0, c_white, 1);
+        draw_sprite_ext(spr_crab_pinchy, mad*current_time/100, x, y, -1, 1, 0, c_white, 1);
+    }
+}
 </string>
           </argument>
         </arguments>

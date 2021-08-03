@@ -150,8 +150,8 @@ with(obj_fish)
 
 with(obj_fish_splat)
 {
-    var xx1 = (x-view_xview+(wid)+30-30)/zoom*quality_scale;
-    var yy1 = (ystart-view_yview+(hei)+60-30-10)/zoom*quality_scale;
+    var xx1 = (x-view_xview+(wid))/zoom*quality_scale;
+    var yy1 = (ystart-view_yview+(hei)+30-10)/zoom*quality_scale;
     var scale = 1/zoom*quality_scale; //(1-(clamp(50-(ystart-y), 0, 50)/50))/zoom*quality_scale;*/
 
     draw_set_alpha(image_alpha);
@@ -160,6 +160,43 @@ with(obj_fish_splat)
     draw_set_color(c_white);
     draw_set_alpha(1);
 }
+
+with(obj_crab)
+{
+    var xx1 = (x-view_xview+(wid)+30-30)/zoom*quality_scale;
+    var yy1 = (y-view_yview+(hei)+30-30)/zoom*quality_scale;
+    var scale = 1/zoom*quality_scale; //(1-(clamp(50-(ystart-y), 0, 50)/50))/zoom*quality_scale;*/
+    // if (ystart-y &gt; 0)
+    {
+        draw_set_color(c_black);
+        draw_ellipse(xx1-15*scale, yy1-5*scale, xx1+15*scale, yy1+5*scale, false);
+        draw_set_color(c_white);
+    }
+    //draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale*1.1, image_yscale*-.6/zoom*quality_scale, -20, c_black, 1);
+}
+
+with(obj_gull)
+{
+    var xx1 = (x-view_xview+(wid))/zoom*quality_scale;
+    var yy1 = (y-view_yview+(hei)+250)/zoom*quality_scale;
+    var scale = 1/zoom*quality_scale;
+    draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale*.5, image_yscale/zoom*quality_scale*.5, image_angle, c_black, image_alpha);
+}
+
+with(obj_floor_bird)
+{
+    var xx1 = (x-view_xview+(wid)+30-30)/zoom*quality_scale;
+    var yy1 = (ystart-view_yview+(hei)+30-30)/zoom*quality_scale;
+    var scale = 1/zoom*quality_scale; //(1-(clamp(50-(ystart-y), 0, 50)/50))/zoom*quality_scale;*/
+    // if (ystart-y &gt; 0)
+    {
+        draw_set_color(c_black);
+        draw_ellipse(xx1-15*scale, yy1-5*scale, xx1+15*scale, yy1+5*scale, false);
+        draw_set_color(c_white);
+    }
+    //draw_sprite_ext(sprite_index, image_index, xx1, yy1, image_xscale/zoom*quality_scale*1.1, image_yscale*-.6/zoom*quality_scale, -20, c_black, 1);
+}
+
 /*with(obj_gulls)
 {
     if (instance_exists(obj_camera))
@@ -214,7 +251,7 @@ if (shaders_are_supported() and shader_is_compiled(just_blur) and shader_is_comp
     var shaderparam = shader_get_uniform(shader, "size");
     shader_set_uniform_f(shaderparam, surface_get_width(surf), surface_get_height(surf), blur_size/zoom*quality_scale);
     shaderparam = shader_get_uniform(shader, "xoffset");
-    shader_set_uniform_f(shaderparam, 0);//sin(current_time/5000)/3);
+    shader_set_uniform_f(shaderparam, 0); //sin(current_time/5000)/3);
 }
 
 if(surface_exists(surf))

@@ -277,7 +277,15 @@ for(var i = 0; i &lt; map_width; i++)
                 var yyy = random_range(j * cell_size, (j+1) * cell_size);
                 if (!collision_circle(xxx, yyy, 40, par_water, true, true))
                     instance_create(xxx, yyy, obj_crab);
-            }     
+            }  
+            
+            repeat(choose(0, 0, 1, 2))
+            {
+                var xxx = random_range(i * cell_size, (i+1) * cell_size);
+                var yyy = random_range(j * cell_size, (j+1) * cell_size);
+                if (!collision_circle(xxx, yyy, 40, par_water, true, true))
+                    instance_create(xxx, yyy, obj_floor_bird);
+            }    
         }
     }
 }
