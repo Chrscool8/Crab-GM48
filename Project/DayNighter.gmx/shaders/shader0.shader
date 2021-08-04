@@ -29,8 +29,8 @@ uniform float lerp;
 
 void main()
 {
-    vec3 color_in = v_vColour.xyz;
-    color_in = mix(color_in*base, color_in*target, lerp);
-    gl_FragColor = color_in * texture2D( gm_BaseTexture, v_vTexcoord );
+    vec4 Color = texture2D(gm_BaseTexture, v_vTexcoord)*v_vColour;
+    Color = Color*vec4(mix(base, target, lerp), 1.0);
+    gl_FragColor = Color;
 }
 

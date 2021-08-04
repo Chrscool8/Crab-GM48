@@ -225,11 +225,54 @@ instance_activate_region(view_xview-200, view_yview-200, view_wview+400, view_hv
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// night mode
+            <string>/// day night cycle
 
-/*shader_set(sh_color_tester);
+shader_set(sh_daynight);
+
+if (obj_globals.time &gt; 6 and obj_globals.time &lt; 18)
+{
+    //draw_sprite_ext(sprite_index, 0, x, y, 1, 1, 0, c_white, 1);
+    shader_set_uniform_f(shader_get_uniform(shader_current(), "base"), 1, 1, 1);
+}
+else
+{
+    //draw_sprite_ext(sprite_index, 2, x, y, 1, 1, 0, c_white, 1);
+    shader_set_uniform_f(shader_get_uniform(shader_current(), "base"), .5, .5, 1);
+}
+
+shader_set_uniform_f(shader_get_uniform(shader_current(), "target"), 1, 1, 1);
+shader_set_uniform_f(shader_get_uniform(shader_current(), "lerp"), 0);
+
+al = easyease(max(0, 1-abs(angle_difference(obj_globals.time/24*360, 90))/45));
+if (al &gt; 0)
+{
+    shader_set_uniform_f(shader_get_uniform(shader_current(), "target"), 1, .75, .75);
+    shader_set_uniform_f(shader_get_uniform(shader_current(), "lerp"), al);
+}
+//draw_sprite_ext(sprite_index, 3, x, y, 1, 1, 0, c_white, al);
+al = easyease(max(0, 1-abs(angle_difference(obj_globals.time/24*360, 270))/45));
+if (al &gt; 0)
+{
+    shader_set_uniform_f(shader_get_uniform(shader_current(), "target"), 1, .75, .825);
+    shader_set_uniform_f(shader_get_uniform(shader_current(), "lerp"), al);
+}
+
 draw_surface(application_surface, 0, 0);
-shader_reset();
+
+shader_reset()
+
+draw_text(20, 90, string(obj_globals.time));
+
+var xx = 120;
+var yy = 120;
+var rad = 30;
+draw_circle(xx, yy, rad, true);
+
+draw_line(xx, yy, xx+lengthdir_x(rad, -obj_globals.time/24*360-90), yy+lengthdir_y(rad, -obj_globals.time/24*360-90));
+
+draw_line(xx-lengthdir_x(rad, 45), yy-lengthdir_y(rad, 45), xx+lengthdir_x(rad, 45), yy+lengthdir_y(rad, 45));
+draw_line(xx-lengthdir_x(rad, -45), yy-lengthdir_y(rad, -45), xx+lengthdir_x(rad, -45), yy+lengthdir_y(rad, -45));
+
 </string>
           </argument>
         </arguments>
