@@ -112,6 +112,7 @@
     <script>scripts\send_gull.gml</script>
     <script>scripts\has_item.gml</script>
     <script>scripts\wrap.gml</script>
+    <script>scripts\easyease.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\just_blur.shader</shader>
@@ -122,6 +123,7 @@
     <shader type="GLSLES">shaders\shader_blur_sand_small.shader</shader>
     <shader type="GLSLES">shaders\sh_color_tester.shader</shader>
     <shader type="GLSLES">shaders\sh_color_replace.shader</shader>
+    <shader type="GLSLES">shaders\sh_daynight.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\font0</font>
