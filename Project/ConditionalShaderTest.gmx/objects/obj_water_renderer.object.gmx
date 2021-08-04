@@ -75,7 +75,7 @@ show_debug_overlay(true);
             <kind>1</kind>
             <string>///Water
 
-var quality_scale = 1; //settings[? "surface_size"];
+var quality_scale = .5; //settings[? "surface_size"];
 
 if (surface_exists(surf) and (surface_get_width(surf)!=view_wport*1.5*quality_scale or surface_get_width(surf)!=view_hport*1.5*quality_scale))
 {
