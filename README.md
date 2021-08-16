@@ -14,4 +14,4 @@ About:
 - Procedurally generated landscape and decorations for a different experience every playthrough.
 - Room wrapping in all directions for endless sailing.
 - I livestreamed almost 45 hours of the development time! (I'm very tired.) You can find the VODs and lots of other fun videos on my Twitch, ChrisBradel.
-- Disclaimer! This is a heavy game to run at max settings with all the shaders active, but you can toggle them individually or as a whole with a couple button presses (see below) to pick which effects you find most important to see.
+- Disclaimer! This is a heavy game to run at max settings with all the shaders active, but you can toggle them individually or as a whole with a couple button presses to pick which effects you find most important to see.
