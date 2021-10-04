@@ -99,6 +99,7 @@
     <sprite>sprites\spr_title</sprite>
     <sprite>sprites\obj_baby_3d</sprite>
     <sprite>sprites\spr_birdie1</sprite>
+    <sprite>sprites\sprite68</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>

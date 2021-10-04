@@ -178,6 +178,22 @@ wrap();
             <kind>1</kind>
             <string>//show_debug_message(string(surf))
 
+if (shader_is_compiled(sh_color_replace))
+{
+    shader_set(sh_color_replace);
+    
+    var shaderparam = shader_get_uniform(shader_current(), "color_old1");
+    shader_set_uniform_f(shaderparam, 226/255, 0, 0, 10/255);
+    shaderparam = shader_get_uniform(shader_current(), "color_new1");
+    shader_set_uniform_f(shaderparam,  global.shirt_color_r/255, global.shirt_color_g/255, global.shirt_color_b/255);
+    
+    shaderparam = shader_get_uniform(shader_current(), "color_old2");
+    shader_set_uniform_f(shaderparam, 88/255, 0, 0, 10/255);
+    shaderparam = shader_get_uniform(shader_current(), "color_new2");
+    shader_set_uniform_f(shaderparam, global.shirt_color_r/255-.2, global.shirt_color_g/255-.2, global.shirt_color_b/255-.2);
+}
+
+
 if (not playable)
 {
     if (instance_exists(obj_player))
@@ -193,7 +209,9 @@ if (not playable)
     }
 }
 
-if (point_in_rectangle(x, y, view_xview, view_yview, view_xview+view_wview, view_yview+view_hview))
+var buffer_size = 100;
+
+if (point_in_rectangle(x, y, view_xview-buffer_size, view_yview-buffer_size, view_xview+view_wview+buffer_size*2, view_yview+view_hview+buffer_size*2))
 {
     if (playable)
         sprite_index = spr_boat;
@@ -259,6 +277,11 @@ else
 {
     if surface_exists(surf)
         surface_free(surf);
+}
+
+if (shader_is_compiled(sh_color_replace))
+{
+    shader_reset();
 }
 </string>
           </argument>
