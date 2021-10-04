@@ -107,7 +107,7 @@ y += vsp;
 
 depth = -y;
 
-if keyboard_check_pressed(ord("M"))
+if keyboard_check_pressed(ord("M")) and false
 {
     mad = not mad;
     vsp = 0;
